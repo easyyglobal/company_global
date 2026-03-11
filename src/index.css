@@ -1,0 +1,48 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css");
+
+@theme {
+  --font-sans: "Pretendard", ui-sans-serif, system-ui, sans-serif;
+  --color-primary: #2DC4B5;
+  --color-secondary: #FF6B6B;
+  --color-accent: #6C5CE7;
+  --color-bg: #F8F9FA;
+  --color-dark: #1A1A1A;
+  --color-white: #ffffff;
+}
+
+@layer base {
+  body {
+    @apply font-sans bg-bg text-dark antialiased selection:bg-primary/30;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/80 backdrop-blur-xl border border-white/20 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)];
+  }
+  .glass-dark {
+    @apply bg-dark/80 backdrop-blur-xl border border-white/10 shadow-2xl;
+  }
+  .glass-button {
+    @apply bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all duration-300;
+  }
+  .btn-primary {
+    @apply px-8 py-4 rounded-2xl bg-primary text-white font-bold shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5 active:scale-95 transition-all duration-300;
+  }
+  .btn-secondary {
+    @apply px-8 py-4 rounded-2xl bg-secondary text-white font-bold shadow-lg shadow-secondary/20 hover:shadow-xl hover:shadow-secondary/30 hover:-translate-y-0.5 active:scale-95 transition-all duration-300;
+  }
+  .btn-accent {
+    @apply px-8 py-4 rounded-2xl bg-accent text-white font-bold shadow-lg shadow-accent/20 hover:shadow-xl hover:shadow-accent/30 hover:-translate-y-0.5 active:scale-95 transition-all duration-300;
+  }
+  .btn-glass {
+    @apply px-8 py-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-dark font-bold hover:bg-white/20 hover:-translate-y-0.5 active:scale-95 transition-all duration-300;
+  }
+}
+
+
+.markdown-body {
+  @apply prose prose-slate max-w-none;
+}
