@@ -36,7 +36,7 @@ export default function Header() {
     >
       <div className={cn(
         "mx-auto transition-all duration-500",
-        (scrolled || !isHome) ? "max-w-7xl" : "max-w-full px-8 md:px-16"
+        (scrolled || !isHome) ? "container-custom" : "max-w-full px-8 md:px-16"
       )}>
         <div className={cn(
           "transition-all duration-500 flex justify-between items-center",

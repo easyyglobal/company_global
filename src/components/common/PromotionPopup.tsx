@@ -29,7 +29,8 @@ export default function PromotionPopup() {
           initial={{ opacity: 0, x: 100, scale: 0.9 }}
           animate={{ opacity: 1, x: 0, scale: 1 }}
           exit={{ opacity: 0, x: 100, scale: 0.9 }}
-          className="fixed top-32 right-8 z-40 w-80 hidden lg:block"
+          className="fixed top-32 z-40 w-80 hidden lg:block"
+          style={{ right: 'calc((100vw - 1280px) / 2 + 3rem)' }}
         >
           <div className="bg-white rounded-[2.5rem] shadow-2xl border border-dark/5 overflow-hidden">
             {/* Promotion Image */}

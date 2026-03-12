@@ -189,6 +189,60 @@ export default function Main() {
         </div>
       </section>
 
+      {/* Portfolio Gallery Slider */}
+      <section className="py-32 bg-dark overflow-hidden">
+        <div className="container-custom mb-16">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+            <div className="space-y-4">
+              <span className="text-primary font-black uppercase tracking-widest text-[10px] block">Our Portfolio</span>
+              <h2 className="text-4xl font-black text-white tracking-tight">실제 진행 프로젝트</h2>
+            </div>
+            <p className="text-white/40 font-medium max-w-md">
+              국내외 유수 기업들과 함께한 성공적인 비즈니스 여행 및 연수 사례입니다.
+            </p>
+          </div>
+        </div>
+
+        <div className="relative">
+          <motion.div 
+            className="flex space-x-6 px-6"
+            animate={{ x: [0, -1000] }}
+            transition={{ 
+              repeat: Infinity, 
+              duration: 30, 
+              ease: "linear" 
+            }}
+          >
+            {[
+              { title: "글로벌 IT 기업 팀빌딩", location: "제주도", img: "/images/service-workshop.jpg" },
+              { title: "금융사 우수 임직원 포상", location: "다낭", img: "/images/service-vip.jpg" },
+              { title: "제조사 신입사원 연수", location: "일본", img: "/images/service-esg.jpg" },
+              { title: "대기업 임원진 워크샵", location: "하와이", img: "/images/hero-bg.jpg" },
+              { title: "스타트업 전사 워크샵", location: "강원도", img: "/images/service-workshop.jpg" },
+              { title: "글로벌 IT 기업 팀빌딩", location: "제주도", img: "/images/service-workshop.jpg" },
+              { title: "금융사 우수 임직원 포상", location: "다낭", img: "/images/service-vip.jpg" },
+              { title: "제조사 신입사원 연수", location: "일본", img: "/images/service-esg.jpg" },
+            ].map((item, idx) => (
+              <div key={idx} className="flex-shrink-0 w-80 group cursor-pointer">
+                <div className="relative aspect-[3/4] rounded-[2rem] overflow-hidden mb-6">
+                  <img 
+                    src={item.img} 
+                    alt={item.title} 
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-dark/80 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
+                  <div className="absolute bottom-8 left-8">
+                    <span className="text-primary font-black text-[10px] uppercase tracking-widest mb-2 block">{item.location}</span>
+                    <h4 className="text-white font-bold text-lg leading-tight">{item.title}</h4>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-32 bg-white relative overflow-hidden border-t border-dark/5">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-primary/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2" />

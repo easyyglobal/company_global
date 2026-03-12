@@ -29,16 +29,19 @@
     @apply bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all duration-300;
   }
   .btn-primary {
-    @apply px-8 py-4 rounded-2xl bg-primary text-white font-bold shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5 active:scale-95 transition-all duration-300;
+    @apply px-8 py-4 rounded-2xl bg-gradient-to-br from-primary to-[#36D7C7] text-white font-bold shadow-[0_10px_20px_-10px_rgba(45,196,181,0.5)] hover:shadow-[0_15px_30px_-10px_rgba(45,196,181,0.6)] hover:-translate-y-1 active:scale-95 transition-all duration-500 flex items-center justify-center;
   }
   .btn-secondary {
-    @apply px-8 py-4 rounded-2xl bg-secondary text-white font-bold shadow-lg shadow-secondary/20 hover:shadow-xl hover:shadow-secondary/30 hover:-translate-y-0.5 active:scale-95 transition-all duration-300;
+    @apply px-8 py-4 rounded-2xl bg-gradient-to-br from-secondary to-[#FF8E8E] text-white font-bold shadow-[0_10px_20px_-10px_rgba(255,107,107,0.5)] hover:shadow-[0_15px_30px_-10px_rgba(255,107,107,0.6)] hover:-translate-y-1 active:scale-95 transition-all duration-500 flex items-center justify-center;
   }
   .btn-accent {
-    @apply px-8 py-4 rounded-2xl bg-accent text-white font-bold shadow-lg shadow-accent/20 hover:shadow-xl hover:shadow-accent/30 hover:-translate-y-0.5 active:scale-95 transition-all duration-300;
+    @apply px-8 py-4 rounded-2xl bg-gradient-to-br from-accent to-[#8E7FFF] text-white font-bold shadow-[0_10px_20px_-10px_rgba(108,92,231,0.5)] hover:shadow-[0_15px_30px_-10px_rgba(108,92,231,0.6)] hover:-translate-y-1 active:scale-95 transition-all duration-500 flex items-center justify-center;
   }
   .btn-glass {
-    @apply px-8 py-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-dark font-bold hover:bg-white/20 hover:-translate-y-0.5 active:scale-95 transition-all duration-300;
+    @apply px-8 py-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-dark font-bold hover:bg-white/20 hover:-translate-y-1 active:scale-95 transition-all duration-500 flex items-center justify-center;
+  }
+  .container-custom {
+    @apply max-w-[1440px] mx-auto px-6 md:px-12;
   }
 }
 

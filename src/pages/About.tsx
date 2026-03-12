@@ -1,34 +1,34 @@
 import { motion } from 'motion/react';
-import { Award, Target, Heart, Users, History, ShieldCheck, Zap } from 'lucide-react';
+import { Award, Target, Heart, Users, ShieldCheck } from 'lucide-react';
 import { fadeIn } from '../constants';
 
 export default function About() {
   return (
     <div className="bg-bg">
       {/* Page Header */}
-      <section className="relative py-32 px-4 overflow-hidden">
-        <div className="absolute inset-0 bg-bg/50 z-0" />
-        <div className="absolute top-0 left-0 w-full h-full z-0 opacity-30">
-          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[100px]" />
-          <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[100px]" />
-        </div>
+      <section className="relative pt-48 pb-32 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-bg to-bg" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-full bg-primary/5 blur-[120px] rounded-full" />
         
-        <div className="max-w-7xl mx-auto relative z-10">
-          <motion.div {...fadeIn} className="max-w-3xl">
-            <div className="inline-flex items-center space-x-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-[10px] font-black tracking-widest uppercase mb-6 border border-primary/10">
-              <Users className="w-3 h-3" />
-              <span>About Us</span>
-            </div>
-            <h1 className="text-4xl md:text-6xl font-black text-dark mb-8 tracking-tighter leading-none">
-              회사 소개
+        <div className="container-custom relative">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="max-w-3xl"
+          >
+            <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-[10px] font-black uppercase tracking-[0.2em] mb-6">
+              About Us
+            </span>
+            <h1 className="text-5xl md:text-7xl font-black text-dark tracking-tight leading-[1.1] mb-8">
+              기업 여행의<br />
+              <span className="text-primary italic">새로운 기준</span>을 만듭니다
             </h1>
-            <p className="text-lg text-dark/60 leading-relaxed font-medium max-w-2xl">
-              이지글로벌의 전문성을 바탕으로 탄생한 기업여행연구소는 
-              비즈니스 여행의 새로운 기준을 만들어갑니다.
+            <p className="text-xl text-dark/60 font-medium leading-relaxed">
+              이지글로벌은 단순한 여행사를 넘어, 기업의 성장을 돕는<br />
+              최고의 비즈니스 파트너로서 전문적인 솔루션을 제공합니다.
             </p>
           </motion.div>
         </div>
-        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-dark/5 to-transparent" />
       </section>
 
       {/* Company Philosophy */}
@@ -136,55 +136,38 @@ export default function About() {
         </div>
       </section>
 
-      {/* History */}
-      <section className="py-32 px-4 bg-dark text-white overflow-hidden relative">
-        <div className="max-w-4xl mx-auto relative z-10">
-          <motion.div {...fadeIn} className="text-center mb-24">
-            <span className="text-primary font-black uppercase tracking-widest text-xs mb-4 block">Our Journey</span>
-            <h2 className="text-3xl md:text-5xl font-black tracking-tighter">우리의 발걸음</h2>
-          </motion.div>
-
-          <div className="space-y-16">
-            {[
-              { year: "2024", event: "기업여행연구소 B2B 전용 플랫폼 런칭 및 법인화" },
-              { year: "2023", event: "이지글로벌 사내 벤처 프로젝트 'Zero-Task' 시작" },
-              { year: "2022", event: "기업 출장 프로세스 혁신 연구 착수" }
-            ].map((item, i) => (
-              <motion.div 
-                key={i}
-                {...fadeIn}
-                className="flex items-start space-x-12 group"
-              >
-                <div className="text-4xl font-black text-primary w-24 flex-shrink-0 group-hover:scale-110 transition-transform duration-300">{item.year}</div>
-                <div className="pt-3 border-l-4 border-white/10 pl-12 pb-8">
-                  <p className="text-2xl font-bold text-white/80 group-hover:text-white transition-colors">{item.event}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Partners */}
-      <section className="py-32 px-4 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <motion.div {...fadeIn} className="text-center mb-20">
-            <h2 className="text-[10px] font-black text-dark/20 uppercase tracking-[0.5em]">Global Partners</h2>
-          </motion.div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-12 items-center opacity-20 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-700">
-            {[1, 2, 3, 4, 5, 6].map(i => (
-              <div key={i} className="flex justify-center">
-                <img 
-                  src="/images/partner-logo.png" 
-                  alt="Partner" 
-                  className="h-6 md:h-8 object-contain"
-                  onError={(e) => {
-                    e.currentTarget.src = "https://logo.clearbit.com/google.com";
-                  }}
-                />
+      {/* History Section */}
+      <section className="py-32 bg-[#0F1115] relative overflow-hidden border-b border-white/5">
+        <div className="container-custom relative">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
+            <div className="space-y-8">
+              <div className="space-y-4">
+                <span className="text-primary font-black uppercase tracking-widest text-[10px] block">Our History</span>
+                <h2 className="text-4xl font-black text-white tracking-tight">이지글로벌이<br />걸어온 길</h2>
               </div>
-            ))}
+              <p className="text-white/40 font-medium leading-relaxed max-w-md">
+                2015년 설립 이후, 수많은 기업들과 함께하며 쌓아온 신뢰와 전문성은 이지글로벌의 가장 큰 자산입니다.
+              </p>
+            </div>
+
+            <div className="space-y-12">
+              {[
+                { year: "2024", title: "AI 기반 맞춤 제안 시스템 도입", desc: "업계 최초 생성형 AI를 활용한 실시간 기업 여행 설계 서비스 런칭" },
+                { year: "2022", title: "누적 고객사 500개 돌파", desc: "글로벌 대기업 및 공공기관 전담 파트너십 체결 확대" },
+                { year: "2019", title: "해외 법인 설립 및 네트워크 확장", desc: "동남아시아 및 유럽 주요 거점 현지 네트워크 구축 완료" },
+                { year: "2015", title: "이지글로벌 설립", desc: "기업 전문 여행 컨설팅 서비스 시작" },
+              ].map((item, idx) => (
+                <div key={idx} className="flex gap-8 group">
+                  <div className="flex-shrink-0">
+                    <span className="text-3xl font-black text-primary/40 group-hover:text-primary transition-colors duration-500">{item.year}</span>
+                  </div>
+                  <div className="space-y-2 pt-1">
+                    <h4 className="text-xl font-bold text-white group-hover:text-primary transition-colors duration-500">{item.title}</h4>
+                    <p className="text-white/40 text-sm leading-relaxed">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

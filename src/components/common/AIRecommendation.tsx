@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Sparkles, X, ChevronRight, ChevronLeft, FileText, Loader2, PhoneCall, Download, CheckCircle2 } from 'lucide-react';
+import { Sparkles, X, ChevronRight, ChevronLeft, FileText, Loader2, PhoneCall, Printer, RefreshCw, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { GoogleGenAI } from "@google/genai";
 
@@ -15,7 +15,11 @@ export default function AIRecommendation() {
     duration: '',
     budget: '',
   });
-  const [proposal, setProposal] = useState('');
+  const [customDestination, setCustomDestination] = useState('');
+  const [customPurpose, setCustomPurpose] = useState('');
+  const [showCustomDest, setShowCustomDest] = useState(false);
+  const [showCustomPurpose, setShowCustomPurpose] = useState(false);
+  const [proposalData, setProposalData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   React.useEffect(() => {
@@ -41,27 +45,36 @@ export default function AIRecommendation() {
       const ai = new GoogleGenAI({ apiKey });
       const response = await ai.models.generateContent({
         model: "gemini-3-flash-preview",
+        config: {
+          responseMimeType: "application/json",
+        },
         contents: `
-          당신은 기업여행연구소의 전문 AI 매니저입니다. 다음 정보를 바탕으로 '간략 제안 보고서'를 작성해주세요.
+          당신은 기업여행연구소의 전문 AI 매니저입니다. 다음 정보를 바탕으로 '기업 맞춤 제안 보고서'를 JSON 형식으로 작성해주세요.
           
-          목적지: ${formData.destination}
+          목적지: ${formData.destination === '직접 입력' ? customDestination : formData.destination}
           기간: ${formData.duration}
-          목적: ${formData.purpose}
+          목적: ${formData.purpose === '기타' ? customPurpose : formData.purpose}
           예산: ${formData.budget}
           
-          [보고서 구성 가이드]
-          1. [핵심 요약] 이 여행의 테마와 기대 효과 (3문장 이내)
-          2. [추천 일정] Day-by-Day 주요 동선 (간결하게)
-          3. [예상 견적] 선택한 예산 범위 내의 대략적인 1인당 비용 가이드
-          4. [전문가 팁] 해당 목적지/목적에 맞는 기업 담당자 필독 팁 (1가지)
-          
-          톤앤매너는 매우 전문적이고 신뢰감 있어야 하며, 한국어로 작성해주세요.
-          불필요한 서술은 제외하고 보고서 형식으로 깔끔하게 출력해주세요.
+          반드시 다음 구조의 JSON으로 응답하세요:
+          {
+            "title": "제안서 제목",
+            "summary": "핵심 요약 (3문장)",
+            "schedule": [
+              {"day": 1, "activity": "활동 내용"},
+              {"day": 2, "activity": "활동 내용"},
+              {"day": 3, "activity": "활동 내용"}
+            ],
+            "budget_guide": "1인당 예상 비용 및 포함 사항",
+            "expert_tip": "전문가 팁",
+            "expected_effect": "기대 효과"
+          }
         `,
       });
 
       if (response.text) {
-        setProposal(response.text);
+        const data = JSON.parse(response.text);
+        setProposalData(data);
         setStep('result');
       } else {
         throw new Error("제안서 생성 실패");
@@ -75,26 +88,24 @@ export default function AIRecommendation() {
     }
   };
 
-  const downloadProposal = () => {
-    const element = document.createElement("a");
-    const file = new Blob([`[기업여행연구소 AI 맞춤 제안 보고서]\n\n${proposal}`], {type: 'text/plain'});
-    element.href = URL.createObjectURL(file);
-    element.download = "기업여행연구소_AI_제안보고서.txt";
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
+  const printProposal = () => {
+    window.print();
   };
 
   const reset = () => {
     setStep('start');
     setFormData({ destination: '', purpose: '', duration: '', budget: '' });
-    setProposal('');
+    setCustomDestination('');
+    setCustomPurpose('');
+    setShowCustomDest(false);
+    setShowCustomPurpose(false);
+    setProposalData(null);
   };
 
   return (
     <>
       {/* Floating Button - Always visible in bottom right */}
-      <div className="fixed bottom-24 right-8 z-40">
+      <div className="fixed bottom-24 right-8 md:right-12 z-40">
         <motion.button
           whileHover={{ scale: 1.05, y: -5 }}
           whileTap={{ scale: 0.95 }}
@@ -119,17 +130,17 @@ export default function AIRecommendation() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
-              className="absolute inset-0 bg-dark/80 backdrop-blur-md"
+              className="absolute inset-0 bg-dark/80 backdrop-blur-md no-print"
             />
             
             <motion.div
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative w-full max-w-2xl bg-white rounded-[3rem] shadow-2xl overflow-hidden"
+              className="relative w-full max-w-2xl bg-white rounded-[3rem] shadow-2xl overflow-hidden print:shadow-none print:rounded-none print:max-w-none print:fixed print:inset-0 print:z-[9999]"
             >
               {/* Header */}
-              <div className="p-8 border-b border-dark/5 flex justify-between items-center bg-bg/50">
+              <div className="p-8 border-b border-dark/5 flex justify-between items-center bg-bg/50 no-print">
                 <div className="flex items-center space-x-4">
                   <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center">
                     <Sparkles className="w-6 h-6 text-primary" />
@@ -148,7 +159,7 @@ export default function AIRecommendation() {
               </div>
 
               {/* Content */}
-              <div className="p-8 min-h-[450px] flex flex-col">
+              <div className="p-8 min-h-[450px] flex flex-col print:p-0">
                 <AnimatePresence mode="wait">
                   {step === 'start' && (
                     <motion.div
@@ -173,10 +184,12 @@ export default function AIRecommendation() {
                       </div>
                       <button 
                         onClick={() => setStep('destination')}
-                        className="btn-primary w-full max-w-xs group"
+                        className="btn-primary w-full max-w-xs group whitespace-nowrap"
                       >
-                        제안서 생성 시작하기
-                        <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                        <span className="flex items-center">
+                          제안서 생성 시작하기
+                          <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform flex-shrink-0" />
+                        </span>
                       </button>
                     </motion.div>
                   )}
@@ -188,10 +201,16 @@ export default function AIRecommendation() {
                         <h4 className="text-2xl font-black text-dark tracking-tight">어디로 떠나시나요?</h4>
                       </div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        {['국내 (제주, 부산 등)', '해외 (동남아, 일본 등)', '해외 (유럽, 미주 등)', '미정 (추천 필요)'].map((opt) => (
+                        {['국내 (제주, 부산 등)', '해외 (동남아, 일본 등)', '해외 (유럽, 미주 등)', '미정 (추천 필요)', '직접 입력'].map((opt) => (
                           <button
                             key={opt}
-                            onClick={() => handleNext('destination', opt, 'purpose')}
+                            onClick={() => {
+                              if (opt === '직접 입력') {
+                                setShowCustomDest(true);
+                              } else {
+                                handleNext('destination', opt, 'purpose');
+                              }
+                            }}
                             className="p-6 rounded-3xl border-2 border-dark/5 hover:border-primary hover:bg-primary/5 text-left transition-all group"
                           >
                             <span className="font-bold text-dark group-hover:text-primary block mb-1">{opt}</span>
@@ -199,6 +218,24 @@ export default function AIRecommendation() {
                           </button>
                         ))}
                       </div>
+                      {showCustomDest && (
+                        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
+                          <input 
+                            type="text" 
+                            value={customDestination}
+                            onChange={(e) => setCustomDestination(e.target.value)}
+                            placeholder="목적지를 입력해주세요"
+                            className="w-full px-6 py-4 rounded-2xl bg-bg border-2 border-primary/20 focus:border-primary outline-none font-bold"
+                          />
+                          <button 
+                            onClick={() => handleNext('destination', '직접 입력', 'purpose')}
+                            disabled={!customDestination}
+                            className="btn-primary w-full py-4"
+                          >
+                            확인
+                          </button>
+                        </motion.div>
+                      )}
                     </motion.div>
                   )}
 
@@ -209,10 +246,16 @@ export default function AIRecommendation() {
                         <h4 className="text-2xl font-black text-dark tracking-tight">방문 목적이 무엇인가요?</h4>
                       </div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        {['팀빌딩 워크샵', 'VIP 비즈니스 출장', '신입사원 해외 연수', '포상 휴가 (Incentive)'].map((opt) => (
+                        {['팀빌딩 워크샵', 'VIP 비즈니스 출장', '신입사원 해외 연수', '포상 휴가 (Incentive)', '기타'].map((opt) => (
                           <button
                             key={opt}
-                            onClick={() => handleNext('purpose', opt, 'duration')}
+                            onClick={() => {
+                              if (opt === '기타') {
+                                setShowCustomPurpose(true);
+                              } else {
+                                handleNext('purpose', opt, 'duration');
+                              }
+                            }}
                             className="p-6 rounded-3xl border-2 border-dark/5 hover:border-primary hover:bg-primary/5 text-left transition-all group"
                           >
                             <span className="font-bold text-dark group-hover:text-primary block mb-1">{opt}</span>
@@ -220,6 +263,24 @@ export default function AIRecommendation() {
                           </button>
                         ))}
                       </div>
+                      {showCustomPurpose && (
+                        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
+                          <input 
+                            type="text" 
+                            value={customPurpose}
+                            onChange={(e) => setCustomPurpose(e.target.value)}
+                            placeholder="목적을 입력해주세요"
+                            className="w-full px-6 py-4 rounded-2xl bg-bg border-2 border-primary/20 focus:border-primary outline-none font-bold"
+                          />
+                          <button 
+                            onClick={() => handleNext('purpose', '기타', 'duration')}
+                            disabled={!customPurpose}
+                            className="btn-primary w-full py-4"
+                          >
+                            확인
+                          </button>
+                        </motion.div>
+                      )}
                     </motion.div>
                   )}
 
@@ -286,34 +347,101 @@ export default function AIRecommendation() {
                     </motion.div>
                   )}
 
-                  {step === 'result' && (
+                  {step === 'result' && proposalData && (
                     <motion.div
                       key="result"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="space-y-6"
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      className="space-y-8 print:space-y-6"
                     >
-                      <div className="flex items-center justify-between mb-2">
-                        <div className="flex items-center space-x-2 text-primary">
-                          <CheckCircle2 className="w-5 h-5" />
-                          <span className="font-bold text-sm">제안서 생성이 완료되었습니다.</span>
+                      <div className="flex justify-between items-start no-print">
+                        <div className="space-y-2">
+                          <span className="text-primary font-black text-xs uppercase tracking-widest">Analysis Complete</span>
+                          <h4 className="text-2xl font-black text-dark tracking-tight">맞춤 제안서가 도착했습니다</h4>
                         </div>
-                        <button 
-                          onClick={downloadProposal}
-                          className="flex items-center space-x-2 text-dark/40 hover:text-primary transition-colors text-xs font-bold uppercase tracking-widest"
-                        >
-                          <Download className="w-4 h-4" />
-                          <span>Download Report</span>
-                        </button>
-                      </div>
-                      
-                      <div className="bg-bg/50 border border-dark/5 p-8 rounded-[2rem] max-h-[400px] overflow-y-auto custom-scrollbar">
-                        <div className="prose prose-sm max-w-none text-dark/80 whitespace-pre-wrap font-medium leading-relaxed">
-                          {proposal}
+                        <div className="flex space-x-2">
+                          <button 
+                            onClick={printProposal}
+                            className="w-12 h-12 rounded-2xl bg-dark text-white flex items-center justify-center hover:bg-dark/90 transition-colors"
+                            title="인쇄 / PDF 저장"
+                          >
+                            <Printer className="w-5 h-5" />
+                          </button>
+                          <button 
+                            onClick={reset}
+                            className="w-12 h-12 rounded-2xl bg-bg text-dark flex items-center justify-center hover:bg-dark/5 transition-colors"
+                            title="다시 시작"
+                          >
+                            <RefreshCw className="w-5 h-5" />
+                          </button>
                         </div>
                       </div>
 
-                      <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                      {/* Proposal Template */}
+                      <div className="bg-bg/50 rounded-[2rem] p-8 border border-dark/5 space-y-8 print:bg-white print:border-none print:p-0">
+                        <div className="text-center space-y-2 pb-8 border-b border-dark/5">
+                          <h2 className="text-2xl font-black text-dark">{proposalData.title}</h2>
+                          <p className="text-sm text-dark/40 font-bold tracking-widest uppercase">Corporate Travel Lab AI Report</p>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                          <div className="space-y-6">
+                            <section className="space-y-3">
+                              <h5 className="text-sm font-black text-primary uppercase tracking-wider flex items-center">
+                                <Sparkles className="w-4 h-4 mr-2" /> 핵심 요약
+                              </h5>
+                              <p className="text-dark/70 leading-relaxed font-medium text-sm">
+                                {proposalData.summary}
+                              </p>
+                            </section>
+
+                            <section className="space-y-3">
+                              <h5 className="text-sm font-black text-primary uppercase tracking-wider flex items-center">
+                                <FileText className="w-4 h-4 mr-2" /> 추천 일정
+                              </h5>
+                              <div className="space-y-3">
+                                {proposalData.schedule.map((item: any, idx: number) => (
+                                  <div key={idx} className="flex space-x-3">
+                                    <span className="text-xs font-black text-dark/30 mt-1">D{item.day}</span>
+                                    <p className="text-sm text-dark/70 font-medium">{item.activity}</p>
+                                  </div>
+                                ))}
+                              </div>
+                            </section>
+                          </div>
+
+                          <div className="space-y-6">
+                            <section className="space-y-3 p-6 bg-white rounded-2xl border border-dark/5">
+                              <h5 className="text-sm font-black text-dark uppercase tracking-wider">예상 견적 가이드</h5>
+                              <p className="text-sm text-dark/70 font-medium leading-relaxed">
+                                {proposalData.budget_guide}
+                              </p>
+                            </section>
+
+                            <section className="space-y-3 p-6 bg-primary/5 rounded-2xl border border-primary/10">
+                              <h5 className="text-sm font-black text-primary uppercase tracking-wider">전문가 팁</h5>
+                              <p className="text-sm text-primary/80 font-medium leading-relaxed italic">
+                                "{proposalData.expert_tip}"
+                              </p>
+                            </section>
+
+                            <section className="space-y-3">
+                              <h5 className="text-sm font-black text-dark uppercase tracking-wider">기대 효과</h5>
+                              <p className="text-sm text-dark/70 font-medium">
+                                {proposalData.expected_effect}
+                              </p>
+                            </section>
+                          </div>
+                        </div>
+
+                        <div className="pt-8 border-t border-dark/5 text-center">
+                          <p className="text-[10px] text-dark/30 font-bold uppercase tracking-[0.2em]">
+                            본 제안서는 AI에 의해 생성되었으며, 실제 견적은 상담을 통해 확정됩니다.
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col sm:flex-row gap-4 pt-4 no-print">
                         <button 
                           onClick={reset}
                           className="btn-glass flex-1 py-4 text-dark rounded-2xl"

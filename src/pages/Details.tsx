@@ -6,29 +6,29 @@ export default function Details() {
   return (
     <div className="bg-bg">
       {/* Page Header */}
-      <section className="relative py-32 px-4 overflow-hidden">
-        <div className="absolute inset-0 bg-bg/50 z-0" />
-        <div className="absolute top-0 left-0 w-full h-full z-0 opacity-30">
-          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[100px]" />
-          <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[100px]" />
-        </div>
+      <section className="relative pt-48 pb-32 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-bg to-bg" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-full bg-primary/5 blur-[120px] rounded-full" />
         
-        <div className="max-w-7xl mx-auto relative z-10">
-          <motion.div {...fadeIn} className="max-w-3xl">
-            <div className="inline-flex items-center space-x-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-[10px] font-black tracking-widest uppercase mb-6 border border-primary/10">
-              <Star className="w-3 h-3" />
-              <span>Services</span>
-            </div>
-            <h1 className="text-4xl md:text-6xl font-black text-dark mb-8 tracking-tighter leading-none">
-              서비스 상세 정보
+        <div className="container-custom relative">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="max-w-3xl"
+          >
+            <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-[10px] font-black uppercase tracking-[0.2em] mb-6">
+              Premium Services
+            </span>
+            <h1 className="text-5xl md:text-7xl font-black text-dark tracking-tight leading-[1.1] mb-8">
+              세밀한 기획이 만드는<br />
+              <span className="text-primary italic">완벽한 경험</span>
             </h1>
-            <p className="text-lg text-dark/60 leading-relaxed font-medium max-w-2xl">
-              기업여행연구소가 제공하는 프리미엄 서비스의 구체적인 내용과 
+            <p className="text-xl text-dark/60 font-medium leading-relaxed">
+              기업여행연구소가 제공하는 프리미엄 서비스의 구체적인 내용과<br />
               실제 진행 사례를 확인해보세요.
             </p>
           </motion.div>
         </div>
-        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-dark/5 to-transparent" />
       </section>
 
       {/* Service Details */}
