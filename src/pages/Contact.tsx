@@ -61,33 +61,30 @@ export default function Contact() {
 
     try {
       // 구글 앱스 스크립트 웹앱 URL을 여기에 입력하세요.
+      // 주의: 반드시 본인의 배포된 웹앱 URL로 변경해야 합니다!
       const scriptUrl = 'YOUR_GOOGLE_APPS_SCRIPT_URL'; 
       
-      // 임시 URL인 경우 성공한 것처럼 처리 (미리보기 환경용)
       if (scriptUrl === 'YOUR_GOOGLE_APPS_SCRIPT_URL') {
-        await new Promise(resolve => setTimeout(resolve, 1000)); // 로딩 시뮬레이션
-        setShowSuccessModal(true);
-        setFormData({
-          companyName: '',
-          name: '',
-          phone: '',
-          email: '',
-          headcount: '10명 미만',
-          inquiryType: 'VIP 비즈니스 출장',
-          message: '',
-          privacy: false
-        });
+        alert('구글 앱스 스크립트 URL이 입력되지 않았습니다. 코드(Contact.tsx)를 확인해주세요.');
         setIsSubmitting(false);
         return;
       }
 
-      const response = await fetch(scriptUrl, {
+      const submitData = new FormData();
+      submitData.append('제출일시', new Date().toLocaleString());
+      submitData.append('회사명', formData.companyName);
+      submitData.append('담당자성함', formData.name);
+      submitData.append('연락처', formData.phone);
+      submitData.append('이메일', formData.email);
+      submitData.append('예상인원', formData.headcount);
+      submitData.append('문의유형', formData.inquiryType);
+      submitData.append('문의내용', formData.message);
+      submitData.append('개인정보동의', formData.privacy ? 'O' : 'X');
+
+      await fetch(scriptUrl, {
         method: 'POST',
-        mode: 'no-cors', // 구글 앱스 스크립트의 CORS 문제를 우회하기 위해 추가
-        headers: {
-          'Content-Type': 'text/plain;charset=utf-8',
-        },
-        body: JSON.stringify(formData),
+        mode: 'no-cors',
+        body: submitData,
       });
 
       // no-cors 모드에서는 response.ok를 확인할 수 없으므로, 에러가 throw되지 않았다면 성공으로 간주합니다.
