@@ -7,19 +7,29 @@ export default function Features() {
   return (
     <div className="bg-bg">
       {/* Page Header */}
-      <section className="py-32 px-4">
-        <div className="max-w-7xl mx-auto">
+      <section className="relative py-32 px-4 overflow-hidden">
+        <div className="absolute inset-0 bg-bg/50 z-0" />
+        <div className="absolute top-0 left-0 w-full h-full z-0 opacity-30">
+          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[100px]" />
+          <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[100px]" />
+        </div>
+        
+        <div className="max-w-7xl mx-auto relative z-10">
           <motion.div {...fadeIn} className="max-w-3xl">
-            <span className="text-primary font-black uppercase tracking-widest text-xs mb-4 block">Features</span>
-            <h1 className="text-4xl md:text-6xl font-black text-dark mb-10 tracking-tighter leading-none">
+            <div className="inline-flex items-center space-x-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-[10px] font-black tracking-widest uppercase mb-6 border border-primary/10">
+              <Globe className="w-3 h-3" />
+              <span>Core Value</span>
+            </div>
+            <h1 className="text-4xl md:text-6xl font-black text-dark mb-8 tracking-tighter leading-none">
               핵심 기능 및 서비스
             </h1>
-            <p className="text-xl text-dark/60 leading-relaxed font-medium">
-              기업여행연구소만의 차별화된 기술력과 네트워크로 
+            <p className="text-lg text-dark/60 leading-relaxed font-medium max-w-2xl">
+              기업여행연구소만의 차별화된 기술력과 글로벌 파트너십으로 
               비즈니스 여행의 패러다임을 바꿉니다.
             </p>
           </motion.div>
         </div>
+        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-dark/5 to-transparent" />
       </section>
 
       {/* Zero-Task Section */}
@@ -30,11 +40,11 @@ export default function Features() {
               <div className="w-16 h-16 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-8">
                 <Zap className="w-8 h-8" />
               </div>
-              <h2 className="text-4xl font-black text-dark mb-8 tracking-tight">Zero-Task: 실무자의 자유</h2>
+              <h2 className="text-4xl font-black text-dark mb-8 tracking-tight">기업 여행 연구소만의 특장점</h2>
               <p className="text-lg text-dark/60 mb-12 leading-relaxed">
-                더 이상 수십 개의 탭을 띄워놓고 가격을 비교할 필요가 없습니다. 
-                기업여행연구소의 전담 매니저가 기획부터 정산까지 모든 과정을 대행합니다. 
-                인사총무팀은 본연의 핵심 업무에만 집중하세요.
+                우리는 단순한 예약을 넘어 기업의 성공적인 행사를 연구합니다. 
+                기획부터 디자인, 전문 인력 섭외까지 원스톱으로 지원하며 
+                ESG 가치 실현과 전세기 이벤트 등 차별화된 경험을 선사합니다.
               </p>
               
               <div className="bg-white p-10 rounded-[2.5rem] border border-dark/5 shadow-xl">
@@ -72,7 +82,7 @@ export default function Features() {
               {[
                 { title: "실시간 대응", sub: "24/7 핫라인", icon: Clock },
                 { title: "비용 절감", sub: "평균 15% 절감", icon: BarChart3, dark: true },
-                { title: "글로벌망", sub: "직영 네트워크", icon: Globe, primary: true },
+                { title: "글로벌망", sub: "글로벌 파트너십", icon: Globe, primary: true },
                 { title: "안전 보장", sub: "위기 대응 매뉴얼", icon: ShieldCheck }
               ].map((item, i) => (
                 <motion.div 
@@ -106,8 +116,8 @@ export default function Features() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               { 
-                title: "직영 네트워크", 
-                desc: "중간 대행사 없이 현지 호텔 및 항공사와 직접 계약하여 거품을 뺐습니다.",
+                title: "글로벌 파트너십", 
+                desc: "검증된 현지 랜드사 및 파트너십을 통해 최적의 동선과 안정적인 현지 케어를 보장합니다.",
                 icon: Globe
               },
               { 
@@ -155,9 +165,12 @@ export default function Features() {
                     {[1, 2, 3, 4].map(i => (
                       <img 
                         key={i} 
-                        src={`https://i.pravatar.cc/100?img=${i+10}`} 
+                        src={`/images/manager-${i}.jpg`} 
                         className="w-14 h-14 rounded-full border-4 border-dark" 
                         alt="Manager"
+                        onError={(e) => {
+                          e.currentTarget.src = `https://i.pravatar.cc/100?img=${i+10}`;
+                        }}
                       />
                     ))}
                   </div>

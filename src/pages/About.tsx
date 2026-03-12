@@ -1,66 +1,91 @@
 import { motion } from 'motion/react';
-import { Award, Target, Heart, Users, History } from 'lucide-react';
+import { Award, Target, Heart, Users, History, ShieldCheck, Zap } from 'lucide-react';
 import { fadeIn } from '../constants';
 
 export default function About() {
   return (
     <div className="bg-bg">
       {/* Page Header */}
-      <section className="py-32 px-4">
-        <div className="max-w-7xl mx-auto">
+      <section className="relative py-32 px-4 overflow-hidden">
+        <div className="absolute inset-0 bg-bg/50 z-0" />
+        <div className="absolute top-0 left-0 w-full h-full z-0 opacity-30">
+          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[100px]" />
+          <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[100px]" />
+        </div>
+        
+        <div className="max-w-7xl mx-auto relative z-10">
           <motion.div {...fadeIn} className="max-w-3xl">
-            <span className="text-primary font-black uppercase tracking-widest text-xs mb-4 block">About Us</span>
-            <h1 className="text-4xl md:text-6xl font-black text-dark mb-10 tracking-tighter leading-none">
+            <div className="inline-flex items-center space-x-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-[10px] font-black tracking-widest uppercase mb-6 border border-primary/10">
+              <Users className="w-3 h-3" />
+              <span>About Us</span>
+            </div>
+            <h1 className="text-4xl md:text-6xl font-black text-dark mb-8 tracking-tighter leading-none">
               회사 소개
             </h1>
-            <p className="text-xl text-dark/60 leading-relaxed font-medium">
+            <p className="text-lg text-dark/60 leading-relaxed font-medium max-w-2xl">
               이지글로벌의 전문성을 바탕으로 탄생한 기업여행연구소는 
               비즈니스 여행의 새로운 기준을 만들어갑니다.
             </p>
           </motion.div>
         </div>
+        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-dark/5 to-transparent" />
       </section>
 
-      {/* CEO Message */}
+      {/* Company Philosophy */}
       <section className="py-24 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-            <motion.div {...fadeIn} className="relative">
-              <div className="rounded-[3rem] overflow-hidden shadow-2xl aspect-[4/5]">
-                <img 
-                  src="/images/ceo.jpg" 
-                  alt="CEO" 
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    e.currentTarget.src = "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=800";
-                  }}
-                  referrerPolicy="no-referrer"
-                />
-              </div>
-              <div className="absolute -bottom-10 -right-10 glass p-10 rounded-3xl shadow-2xl">
-                <p className="text-3xl font-black text-primary mb-1 tracking-tight">홍길동</p>
-                <p className="text-xs font-black text-dark/30 uppercase tracking-[0.2em]">Founder & CEO</p>
-              </div>
-            </motion.div>
             <motion.div {...fadeIn}>
               <h2 className="text-3xl md:text-5xl font-black text-dark mb-10 tracking-tighter leading-tight">
                 "우리는 기업 여행의<br /><span className="text-primary">새로운 표준</span>을 연구합니다."
               </h2>
               <div className="space-y-8 text-lg text-dark/60 leading-relaxed font-medium">
                 <p>
-                  안녕하십니까, 기업여행연구소 대표 홍길동입니다. 
-                  우리는 '왜 기업 출장은 항상 복잡하고 번거로워야 할까?'라는 
-                  단순한 의문에서 시작한 스타트업입니다.
+                  기업여행연구소는 '왜 기업 출장은 항상 복잡하고 번거로워야 할까?'라는 
+                  단순한 의문에서 시작되었습니다.
                 </p>
                 <p>
-                  기존의 관행적인 여행 대행 서비스에서 벗어나, 
+                  우리는 기존의 관행적인 여행 대행 서비스에서 벗어나, 
                   IT 기술과 전문 큐레이션을 결합하여 인사총무팀의 업무 효율을 
                   극대화하는 'Zero-Task' 솔루션을 제안합니다.
                 </p>
                 <p>
-                  우리는 규모보다 깊이를, 경력보다 혁신을 믿습니다. 
+                  신규 업체로서 우리는 규모보다 깊이를, 경력보다 혁신을 믿습니다. 
                   귀사의 성장을 지원하는 가장 젊고 스마트한 파트너가 되겠습니다.
                 </p>
+              </div>
+            </motion.div>
+            <motion.div {...fadeIn} className="relative">
+              <div className="glass p-12 rounded-[3rem] border border-primary/10 shadow-xl">
+                <div className="space-y-8">
+                  <div className="flex items-start space-x-6">
+                    <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <Target className="w-6 h-6 text-primary" />
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-bold text-dark mb-2">젊은 감각, 빠른 대응</h4>
+                      <p className="text-sm text-dark/50">관행에 얽매이지 않는 유연한 사고로 가장 효율적인 경로를 찾아냅니다.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start space-x-6">
+                    <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <Users className="w-6 h-6 text-primary" />
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-bold text-dark mb-2">1:1 전담 매니저제</h4>
+                      <p className="text-sm text-dark/50">모든 고객사에는 숙련된 전담 매니저가 배정되어 끝까지 책임집니다.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start space-x-6">
+                    <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <ShieldCheck className="w-6 h-6 text-primary" />
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-bold text-dark mb-2">투명한 비용 정산</h4>
+                      <p className="text-sm text-dark/50">숨겨진 수수료 없이 모든 비용을 투명하게 공개하고 정산합니다.</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </motion.div>
           </div>

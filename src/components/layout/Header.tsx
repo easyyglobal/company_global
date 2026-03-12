@@ -13,20 +13,57 @@ const navItems = [
 
 export default function Header() {
   const [isOpen, setIsOpen] = React.useState(false);
+  const [scrolled, setScrolled] = React.useState(false);
   const location = useLocation();
 
+  React.useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const isHome = location.pathname === '/';
+  const isTransparent = isHome && !scrolled;
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 px-4 py-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="glass rounded-[2rem] px-8 py-4 flex justify-between items-center">
+    <header 
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
+        (scrolled || !isHome) ? "py-4 px-4" : "py-6 px-0"
+      )}
+    >
+      <div className={cn(
+        "mx-auto transition-all duration-500",
+        (scrolled || !isHome) ? "max-w-7xl" : "max-w-full px-8 md:px-16"
+      )}>
+        <div className={cn(
+          "transition-all duration-500 flex justify-between items-center",
+          (scrolled || !isHome)
+            ? "glass rounded-[2rem] px-8 py-4 shadow-lg" 
+            : "bg-transparent py-2"
+        )}>
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-3 group">
-              <div className="w-12 h-12 bg-primary rounded-2xl flex items-center justify-center group-hover:rotate-12 transition-all duration-500 shadow-lg shadow-primary/20">
-                <span className="text-white font-black text-2xl">C</span>
+              <div className={cn(
+                "w-12 h-12 rounded-2xl flex items-center justify-center group-hover:rotate-12 transition-all duration-500 shadow-lg",
+                scrolled ? "bg-primary shadow-primary/20" : "bg-white shadow-white/10"
+              )}>
+                <span className={cn(
+                  "font-black text-2xl",
+                  scrolled ? "text-white" : "text-primary"
+                )}>C</span>
               </div>
               <div className="flex flex-col">
-                <span className="text-xl font-black text-dark tracking-tighter leading-none">기업여행연구소</span>
-                <span className="text-[9px] text-primary font-black tracking-[0.3em] uppercase opacity-70">Corporate Travel Lab</span>
+                <span className={cn(
+                  "text-xl font-black tracking-tighter leading-none transition-colors",
+                  isTransparent ? "text-white" : "text-dark"
+                )}>기업여행연구소</span>
+                <span className={cn(
+                  "text-[9px] font-black tracking-[0.3em] uppercase opacity-70 transition-colors",
+                  isTransparent ? "text-primary-light text-white/80" : "text-primary"
+                )}>Corporate Travel Lab</span>
               </div>
             </Link>
           </div>
@@ -39,7 +76,9 @@ export default function Header() {
                 to={item.path}
                 className={cn(
                   "text-sm font-bold transition-all hover:text-primary relative group py-2",
-                  location.pathname === item.path ? "text-primary" : "text-dark/60"
+                  location.pathname === item.path 
+                    ? "text-primary" 
+                    : (isTransparent ? "text-white/80 hover:text-white" : "text-dark/60")
                 )}
               >
                 {item.name}
@@ -51,7 +90,10 @@ export default function Header() {
             ))}
             <Link
               to="/contact"
-              className="btn-primary py-3 px-8 text-sm flex items-center group"
+              className={cn(
+                "btn-primary py-3 px-8 text-sm flex items-center group",
+                !scrolled && isHome && "bg-white text-primary hover:bg-white/90 shadow-none"
+              )}
             >
               <PhoneCall className="w-4 h-4 mr-2 group-hover:rotate-12 transition-transform" />
               상담 신청
@@ -62,7 +104,10 @@ export default function Header() {
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="w-10 h-10 flex items-center justify-center rounded-xl bg-bg text-dark hover:text-primary transition-colors"
+              className={cn(
+                "w-10 h-10 flex items-center justify-center rounded-xl transition-colors",
+                isTransparent ? "bg-white/10 text-white" : "bg-bg text-dark hover:text-primary"
+              )}
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>

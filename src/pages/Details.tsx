@@ -1,24 +1,34 @@
 import { motion } from 'motion/react';
-import { CheckCircle2, Star, Quote, Users } from 'lucide-react';
+import { CheckCircle2, Star, Quote, Users, Globe } from 'lucide-react';
 import { fadeIn } from '../constants';
 
 export default function Details() {
   return (
     <div className="bg-bg">
       {/* Page Header */}
-      <section className="py-32 px-4">
-        <div className="max-w-7xl mx-auto">
+      <section className="relative py-32 px-4 overflow-hidden">
+        <div className="absolute inset-0 bg-bg/50 z-0" />
+        <div className="absolute top-0 left-0 w-full h-full z-0 opacity-30">
+          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[100px]" />
+          <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[100px]" />
+        </div>
+        
+        <div className="max-w-7xl mx-auto relative z-10">
           <motion.div {...fadeIn} className="max-w-3xl">
-            <span className="text-primary font-black uppercase tracking-widest text-xs mb-4 block">Services</span>
-            <h1 className="text-4xl md:text-6xl font-black text-dark mb-10 tracking-tighter leading-none">
+            <div className="inline-flex items-center space-x-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-[10px] font-black tracking-widest uppercase mb-6 border border-primary/10">
+              <Star className="w-3 h-3" />
+              <span>Services</span>
+            </div>
+            <h1 className="text-4xl md:text-6xl font-black text-dark mb-8 tracking-tighter leading-none">
               서비스 상세 정보
             </h1>
-            <p className="text-xl text-dark/60 leading-relaxed font-medium">
+            <p className="text-lg text-dark/60 leading-relaxed font-medium max-w-2xl">
               기업여행연구소가 제공하는 프리미엄 서비스의 구체적인 내용과 
               실제 진행 사례를 확인해보세요.
             </p>
           </motion.div>
         </div>
+        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-dark/5 to-transparent" />
       </section>
 
       {/* Service Details */}
@@ -30,18 +40,17 @@ export default function Details() {
               <div className="w-16 h-16 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-8">
                 <Star className="w-8 h-8" />
               </div>
-              <h2 className="text-4xl font-black text-dark mb-8 tracking-tight">VIP 비즈니스 출장 컨시어지</h2>
+              <h2 className="text-4xl font-black text-dark mb-8 tracking-tight">기업 여행 특화 솔루션</h2>
               <p className="text-lg text-dark/60 mb-10 leading-relaxed">
-                임원 및 핵심 인력의 출장은 단순한 이동이 아닌 비즈니스의 연장선입니다. 
-                최상의 컨디션을 유지할 수 있도록 항공, 숙박, 현지 의전까지 
-                A to Z 밀착 케어를 제공합니다.
+                기업여행연구소는 단순한 여행사가 아닙니다. 기업의 문화와 목적을 이해하고, 
+                기획부터 디자인, 운영까지 모든 과정을 전문적으로 지원하는 비즈니스 파트너입니다.
               </p>
               <ul className="space-y-5 mb-12">
                 {[
-                  "전 세계 주요 항공사 비즈니스/퍼스트 클래스 최적가 확보",
-                  "글로벌 5성급 호텔 법인 특가 및 VIP 베네핏 적용",
-                  "현지 공항 픽업 및 전용 차량 의전 서비스",
-                  "긴급 상황 대비 24시간 실시간 핫라인 운영"
+                  "기업 문화에 최적화된 맞춤형 일정 기획",
+                  "행사 컨셉에 맞는 전문 디자인 지원 (배너, 굿즈 등)",
+                  "전문 MC 및 레크리에이션 강사 섭외 지원",
+                  "ESG 가치를 담은 친환경 연계 연수 프로그램"
                 ].map((item, i) => (
                   <li key={i} className="flex items-start space-x-4">
                     <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0 mt-0.5" />
@@ -80,17 +89,17 @@ export default function Details() {
               <div className="w-16 h-16 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-8">
                 <Users className="w-8 h-8" />
               </div>
-              <h2 className="text-4xl font-black text-dark mb-8 tracking-tight">맞춤형 팀빌딩 워크샵</h2>
+              <h2 className="text-4xl font-black text-dark mb-8 tracking-tight">프리미엄 전세기 & 이벤트</h2>
               <p className="text-lg text-dark/60 mb-10 leading-relaxed">
-                천편일률적인 워크샵에서 벗어나 조직의 문화와 목표에 맞는 
-                독창적인 프로그램을 기획합니다. 기획부터 운영, 정산까지 
-                인사팀의 손길이 닿지 않아도 완벽하게 진행됩니다.
+                이동 수단을 넘어선 특별한 경험을 제공합니다. 
+                우리 기업만을 위한 전세기를 통해 비행기 안에서부터 
+                설레는 이벤트를 시작할 수 있습니다.
               </p>
               <ul className="space-y-5 mb-12">
                 {[
-                  "조직 진단 기반 맞춤형 팀빌딩 커리큘럼 설계",
-                  "전국/해외 유니크 베뉴 및 숙소 큐레이션",
-                  "전문 레크리에이션 강사 및 퍼실리테이터 매칭",
+                  "기업 전용 전세기(Charter) 수급 및 운영",
+                  "기내 커스텀 브랜딩 및 특별 이벤트 기획",
+                  "글로벌 네트워크를 통한 유니크 베뉴 섭외",
                   "행사 기록 영상 및 사진 촬영 서비스 제공"
                 ].map((item, i) => (
                   <li key={i} className="flex items-start space-x-4">
@@ -99,6 +108,45 @@ export default function Details() {
                   </li>
                 ))}
               </ul>
+            </motion.div>
+          </div>
+
+          {/* ESG Training Section */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <motion.div {...fadeIn}>
+              <div className="w-16 h-16 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-8">
+                <Globe className="w-8 h-8" />
+              </div>
+              <h2 className="text-4xl font-black text-dark mb-8 tracking-tight">ESG 연계 기업 연수</h2>
+              <p className="text-lg text-dark/60 mb-10 leading-relaxed">
+                단순한 관광을 넘어 기업의 사회적 책임을 실천하는 연수 프로그램을 제안합니다. 
+                현지 커뮤니티 기여, 탄소 중립 실천 등 ESG 가치를 직접 체험하고 
+                조직의 철학을 내재화할 수 있는 특별한 여정을 만듭니다.
+              </p>
+              <ul className="space-y-5 mb-12">
+                {[
+                  "탄소 중립 실천을 위한 친환경 이동 및 숙박 큐레이션",
+                  "현지 사회적 기업 및 비영리 단체 연계 봉사 활동",
+                  "지속 가능한 발전을 위한 전문가 초빙 세미나",
+                  "제로 웨이스트(Zero-Waste) 컨셉의 행사 운영"
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start space-x-4">
+                    <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-dark font-medium">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+            <motion.div {...fadeIn} className="rounded-[3rem] overflow-hidden shadow-2xl">
+              <img 
+                src="/images/service-esg.jpg" 
+                alt="ESG Training" 
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  e.currentTarget.src = "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=800";
+                }}
+                referrerPolicy="no-referrer"
+              />
             </motion.div>
           </div>
         </div>
