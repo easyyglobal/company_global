@@ -9,8 +9,7 @@ export default function PromotionPopup() {
   useEffect(() => {
     const hideUntil = localStorage.getItem('hidePromotionUntil');
     if (!hideUntil || new Date().getTime() > parseInt(hideUntil)) {
-      const timer = setTimeout(() => setIsVisible(true), 1500);
-      return () => clearTimeout(timer);
+      setIsVisible(true);
     }
   }, []);
 

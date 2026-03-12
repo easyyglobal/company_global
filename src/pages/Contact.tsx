@@ -83,28 +83,25 @@ export default function Contact() {
 
       const response = await fetch(scriptUrl, {
         method: 'POST',
-        // 보안 정책상 application/json이 막힐 수 있으므로 text/plain 사용
+        mode: 'no-cors', // 구글 앱스 스크립트의 CORS 문제를 우회하기 위해 추가
         headers: {
           'Content-Type': 'text/plain;charset=utf-8',
         },
         body: JSON.stringify(formData),
       });
 
-      if (response.ok) {
-        setShowSuccessModal(true);
-        setFormData({
-          companyName: '',
-          name: '',
-          phone: '',
-          email: '',
-          headcount: '10명 미만',
-          inquiryType: 'VIP 비즈니스 출장',
-          message: '',
-          privacy: false
-        });
-      } else {
-        throw new Error('Network response was not ok.');
-      }
+      // no-cors 모드에서는 response.ok를 확인할 수 없으므로, 에러가 throw되지 않았다면 성공으로 간주합니다.
+      setShowSuccessModal(true);
+      setFormData({
+        companyName: '',
+        name: '',
+        phone: '',
+        email: '',
+        headcount: '10명 미만',
+        inquiryType: 'VIP 비즈니스 출장',
+        message: '',
+        privacy: false
+      });
     } catch (error) {
       console.error('Error submitting form:', error);
       setSubmitError('상담 신청 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
