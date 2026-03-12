@@ -25,7 +25,7 @@ export default function Main() {
           <div className="absolute inset-0 bg-dark/40 backdrop-blur-[2px]" />
         </div>
 
-        <div className="container-custom mx-auto px-6 relative z-10">
+        <div className="container-custom w-full mx-auto px-6 relative z-10">
           <div className="max-w-3xl">
             <motion.div
               initial={{ opacity: 0, x: -30 }}

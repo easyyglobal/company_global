@@ -103,11 +103,31 @@ export default function Header() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
-                  "btn-accent py-3 px-6 text-sm flex items-center group",
-                  !scrolled && isHome && "bg-white/10 text-white hover:bg-white/20 shadow-none border border-white/20"
+                  "h-[46px] px-6 flex items-center justify-center rounded-xl transition-all duration-300 group backdrop-blur-md border",
+                  !scrolled && isHome 
+                    ? "bg-white/10 border-white/20 hover:bg-white/20" 
+                    : "bg-dark/5 border-dark/10 hover:bg-dark/10"
                 )}
+                title="이지글로벌 홈페이지로 이동"
               >
-                이지글로벌
+                {/* 로고 이미지를 public/images/easyglobal-logo.png 에 넣어주세요 */}
+                <img 
+                  src="/images/easyglobal-logo.png" 
+                  alt="이지글로벌" 
+                  className="h-5 w-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                    if (e.currentTarget.nextElementSibling) {
+                      e.currentTarget.nextElementSibling.classList.remove('hidden');
+                    }
+                  }}
+                />
+                <span className={cn(
+                  "hidden font-bold text-sm",
+                  !scrolled && isHome ? "text-white" : "text-dark"
+                )}>
+                  이지글로벌
+                </span>
               </a>
             </div>
           </nav>

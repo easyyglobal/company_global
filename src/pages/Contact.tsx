@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Send, Phone, Mail, MapPin, ChevronDown, ChevronUp } from 'lucide-react';
+import { Send, Phone, Mail, MapPin, ChevronDown, ChevronUp, CheckCircle2 } from 'lucide-react';
 import { fadeIn } from '../constants';
 import { cn } from '../lib/utils';
 
@@ -26,7 +26,7 @@ const faqs = [
 export default function Contact() {
   const [openFaq, setOpenFaq] = React.useState<number | null>(0);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
-  const [submitSuccess, setSubmitSuccess] = React.useState(false);
+  const [showSuccessModal, setShowSuccessModal] = React.useState(false);
   const [submitError, setSubmitError] = React.useState('');
 
   const [formData, setFormData] = React.useState({
@@ -61,7 +61,7 @@ export default function Contact() {
 
     try {
       // 구글 앱스 스크립트 웹앱 URL을 여기에 입력하세요.
-      const scriptUrl = 'https://script.google.com/macros/s/AKfycbzQpfnrR0Vu5GoCwFiZvAtzWjVtH6r6LVSWfq7CNqsAEUHycfy7pNk2jHwhf6OxoaPq/exec'; 
+      const scriptUrl = 'YOUR_GOOGLE_APPS_SCRIPT_URL'; 
       
       const response = await fetch(scriptUrl, {
         method: 'POST',
@@ -73,7 +73,7 @@ export default function Contact() {
       });
 
       if (response.ok) {
-        setSubmitSuccess(true);
+        setShowSuccessModal(true);
         setFormData({
           companyName: '',
           name: '',
@@ -84,7 +84,6 @@ export default function Contact() {
           message: '',
           privacy: false
         });
-        alert('상담 신청이 완료되었습니다. 담당자가 곧 연락드리겠습니다.');
       } else {
         throw new Error('Network response was not ok.');
       }
@@ -374,6 +373,43 @@ export default function Contact() {
           </div>
         </div>
       </section>
+
+      {/* Success Modal */}
+      <AnimatePresence>
+        {showSuccessModal && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowSuccessModal(false)}
+              className="absolute inset-0 bg-dark/60 backdrop-blur-sm"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="relative bg-white rounded-[2rem] p-10 max-w-md w-full shadow-2xl text-center"
+            >
+              <div className="w-20 h-20 bg-emerald-100 text-emerald-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                <CheckCircle2 className="w-10 h-10" />
+              </div>
+              <h3 className="text-2xl font-black text-dark mb-4 tracking-tight">접수 완료</h3>
+              <p className="text-dark/60 font-medium leading-relaxed mb-8">
+                상담 신청이 성공적으로 접수되었습니다.<br />
+                담당자가 내용을 확인한 후<br />
+                입력해주신 연락처로 곧 연락드리겠습니다.
+              </p>
+              <button
+                onClick={() => setShowSuccessModal(false)}
+                className="btn-primary w-full py-4 rounded-xl"
+              >
+                확인
+              </button>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
