@@ -25,6 +25,76 @@ const faqs = [
 
 export default function Contact() {
   const [openFaq, setOpenFaq] = React.useState<number | null>(0);
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [submitSuccess, setSubmitSuccess] = React.useState(false);
+  const [submitError, setSubmitError] = React.useState('');
+
+  const [formData, setFormData] = React.useState({
+    companyName: '',
+    name: '',
+    phone: '',
+    email: '',
+    headcount: '10명 미만',
+    inquiryType: 'VIP 비즈니스 출장',
+    message: '',
+    privacy: false
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value, type } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!formData.privacy) {
+      alert('개인정보 수집 및 이용에 동의해주세요.');
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitError('');
+
+    try {
+      // 구글 앱스 스크립트 웹앱 URL을 여기에 입력하세요.
+      const scriptUrl = 'YOUR_GOOGLE_APPS_SCRIPT_URL'; 
+      
+      const response = await fetch(scriptUrl, {
+        method: 'POST',
+        // 보안 정책상 application/json이 막힐 수 있으므로 text/plain 사용
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSubmitSuccess(true);
+        setFormData({
+          companyName: '',
+          name: '',
+          phone: '',
+          email: '',
+          headcount: '10명 미만',
+          inquiryType: 'VIP 비즈니스 출장',
+          message: '',
+          privacy: false
+        });
+        alert('상담 신청이 완료되었습니다. 담당자가 곧 연락드리겠습니다.');
+      } else {
+        throw new Error('Network response was not ok.');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitError('상담 신청 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="bg-bg">
@@ -34,23 +104,28 @@ export default function Contact() {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-full bg-primary/5 blur-[120px] rounded-full" />
         
         <div className="container-custom relative">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="max-w-3xl"
-          >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-[10px] font-black uppercase tracking-[0.2em] mb-6">
-              Contact Us
-            </span>
-            <h1 className="text-5xl md:text-7xl font-black text-dark tracking-tight leading-[1.1] mb-8">
-              당신의 비즈니스 파트너,<br />
-              <span className="text-primary italic">지금 시작하세요</span>
-            </h1>
-            <p className="text-xl text-dark/60 font-medium leading-relaxed">
-              귀사의 비즈니스 여행을 위한 최고의 제안을 준비하겠습니다.<br />
-              지금 바로 전문가와 상담하세요.
-            </p>
-          </motion.div>
+          <div className="flex items-center justify-between">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="max-w-3xl"
+            >
+              <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-[10px] font-black uppercase tracking-[0.2em] mb-6">
+                Contact Us
+              </span>
+              <h1 className="text-4xl md:text-5xl font-black text-dark tracking-tight leading-[1.1] mb-8">
+                당신의 비즈니스 파트너,<br />
+                <span className="text-primary italic">지금 시작하세요</span>
+              </h1>
+              <p className="text-lg text-dark/60 font-medium leading-relaxed">
+                귀사의 비즈니스 여행을 위한 최고의 제안을 준비하겠습니다.<br />
+                지금 바로 전문가와 상담하세요.
+              </p>
+            </motion.div>
+            <div className="hidden md:block">
+              <img src="/images/3d-icon.png" alt="3D Icon" className="w-64 h-64 opacity-50" />
+            </div>
+          </div>
         </div>
       </section>
 
@@ -111,22 +186,30 @@ export default function Contact() {
                 className="bg-white p-10 md:p-16 rounded-[4rem] shadow-2xl shadow-dark/5 border border-dark/5"
               >
                 <h2 className="text-3xl font-black text-dark mb-12 tracking-tight">1:1 맞춤 견적 요청</h2>
-                <form className="space-y-8" onSubmit={(e) => e.preventDefault()}>
+                <form className="space-y-8" onSubmit={handleSubmit}>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="space-y-3">
                       <label className="text-[10px] font-black text-dark/30 uppercase tracking-widest ml-1">Company Name</label>
                       <input 
                         type="text" 
+                        name="companyName"
+                        value={formData.companyName}
+                        onChange={handleChange}
                         placeholder="예: (주)이지글로벌" 
                         className="w-full px-6 py-4 rounded-2xl bg-bg border-none focus:ring-2 focus:ring-primary/20 outline-none transition-all font-bold text-dark placeholder:text-dark/20"
+                        required
                       />
                     </div>
                     <div className="space-y-3">
                       <label className="text-[10px] font-black text-dark/30 uppercase tracking-widest ml-1">Your Name</label>
                       <input 
                         type="text" 
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
                         placeholder="성함을 입력해주세요" 
                         className="w-full px-6 py-4 rounded-2xl bg-bg border-none focus:ring-2 focus:ring-primary/20 outline-none transition-all font-bold text-dark placeholder:text-dark/20"
+                        required
                       />
                     </div>
                   </div>
@@ -136,16 +219,24 @@ export default function Contact() {
                       <label className="text-[10px] font-black text-dark/30 uppercase tracking-widest ml-1">Phone Number</label>
                       <input 
                         type="tel" 
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
                         placeholder="010-0000-0000" 
                         className="w-full px-6 py-4 rounded-2xl bg-bg border-none focus:ring-2 focus:ring-primary/20 outline-none transition-all font-bold text-dark placeholder:text-dark/20"
+                        required
                       />
                     </div>
                     <div className="space-y-3">
                       <label className="text-[10px] font-black text-dark/30 uppercase tracking-widest ml-1">Email Address</label>
                       <input 
                         type="email" 
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
                         placeholder="example@company.com" 
                         className="w-full px-6 py-4 rounded-2xl bg-bg border-none focus:ring-2 focus:ring-primary/20 outline-none transition-all font-bold text-dark placeholder:text-dark/20"
+                        required
                       />
                     </div>
                   </div>
@@ -153,7 +244,12 @@ export default function Contact() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="space-y-3">
                       <label className="text-[10px] font-black text-dark/30 uppercase tracking-widest ml-1">Expected Headcount</label>
-                      <select className="w-full px-6 py-4 rounded-2xl bg-bg border-none focus:ring-2 focus:ring-primary/20 outline-none transition-all font-bold text-dark appearance-none">
+                      <select 
+                        name="headcount"
+                        value={formData.headcount}
+                        onChange={handleChange}
+                        className="w-full px-6 py-4 rounded-2xl bg-bg border-none focus:ring-2 focus:ring-primary/20 outline-none transition-all font-bold text-dark appearance-none"
+                      >
                         <option>10명 미만</option>
                         <option>10명 - 30명</option>
                         <option>30명 - 50명</option>
@@ -163,7 +259,12 @@ export default function Contact() {
                     </div>
                     <div className="space-y-3">
                       <label className="text-[10px] font-black text-dark/30 uppercase tracking-widest ml-1">Inquiry Type</label>
-                      <select className="w-full px-6 py-4 rounded-2xl bg-bg border-none focus:ring-2 focus:ring-primary/20 outline-none transition-all font-bold text-dark appearance-none">
+                      <select 
+                        name="inquiryType"
+                        value={formData.inquiryType}
+                        onChange={handleChange}
+                        className="w-full px-6 py-4 rounded-2xl bg-bg border-none focus:ring-2 focus:ring-primary/20 outline-none transition-all font-bold text-dark appearance-none"
+                      >
                         <option>VIP 비즈니스 출장</option>
                         <option>팀빌딩 워크샵</option>
                         <option>ESG 연계 연수</option>
@@ -175,6 +276,9 @@ export default function Contact() {
                   <div className="space-y-3">
                     <label className="text-[10px] font-black text-dark/30 uppercase tracking-widest ml-1">Message</label>
                     <textarea 
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
                       rows={5} 
                       placeholder="희망 일정, 예산 범위, 목적지 등 상세 내용을 적어주시면 더 정확한 제안이 가능합니다." 
                       className="w-full px-6 py-4 rounded-2xl bg-bg border-none focus:ring-2 focus:ring-primary/20 outline-none transition-all font-bold text-dark placeholder:text-dark/20 resize-none"
@@ -182,13 +286,39 @@ export default function Contact() {
                   </div>
 
                   <div className="flex items-center space-x-3 py-2">
-                    <input type="checkbox" id="privacy" className="w-5 h-5 text-primary rounded-lg border-none bg-bg focus:ring-primary/20" />
+                    <input 
+                      type="checkbox" 
+                      id="privacy" 
+                      name="privacy"
+                      checked={formData.privacy}
+                      onChange={handleChange}
+                      className="w-5 h-5 text-primary rounded-lg border-none bg-bg focus:ring-primary/20" 
+                    />
                     <label htmlFor="privacy" className="text-xs font-bold text-dark/40 underline cursor-pointer">개인정보 수집 및 이용에 동의합니다.</label>
                   </div>
 
-                  <button className="w-full py-6 btn-primary text-xl flex items-center justify-center">
-                    <Send className="w-6 h-6 mr-3" />
-                    제안서 요청하기
+                  {submitError && (
+                    <div className="text-red-500 text-sm font-bold text-center">
+                      {submitError}
+                    </div>
+                  )}
+
+                  <button 
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full py-6 btn-primary text-xl flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isSubmitting ? (
+                      <span className="flex items-center">
+                        <div className="w-6 h-6 border-2 border-white/20 border-t-white rounded-full animate-spin mr-3" />
+                        처리 중...
+                      </span>
+                    ) : (
+                      <span className="flex items-center">
+                        <Send className="w-6 h-6 mr-3" />
+                        제안서 요청하기
+                      </span>
+                    )}
                   </button>
                 </form>
               </motion.div>

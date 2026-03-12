@@ -11,23 +11,28 @@ export default function About() {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-full bg-primary/5 blur-[120px] rounded-full" />
         
         <div className="container-custom relative">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="max-w-3xl"
-          >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-[10px] font-black uppercase tracking-[0.2em] mb-6">
-              About Us
-            </span>
-            <h1 className="text-5xl md:text-7xl font-black text-dark tracking-tight leading-[1.1] mb-8">
-              기업 여행의<br />
-              <span className="text-primary italic">새로운 기준</span>을 만듭니다
-            </h1>
-            <p className="text-xl text-dark/60 font-medium leading-relaxed">
-              이지글로벌은 단순한 여행사를 넘어, 기업의 성장을 돕는<br />
-              최고의 비즈니스 파트너로서 전문적인 솔루션을 제공합니다.
-            </p>
-          </motion.div>
+          <div className="flex items-center justify-between">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="max-w-3xl"
+            >
+              <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-[10px] font-black uppercase tracking-[0.2em] mb-6">
+                About Us
+              </span>
+              <h1 className="text-4xl md:text-5xl font-black text-dark tracking-tight leading-[1.1] mb-8">
+                기업 여행의<br />
+                <span className="text-primary italic">새로운 기준</span>을 만듭니다
+              </h1>
+              <p className="text-lg text-dark/60 font-medium leading-relaxed">
+                이지글로벌은 단순한 여행사를 넘어, 기업의 성장을 돕는<br />
+                최고의 비즈니스 파트너로서 전문적인 솔루션을 제공합니다.
+              </p>
+            </motion.div>
+            <div className="hidden md:block">
+              <img src="/images/3d-icon.png" alt="3D Icon" className="w-64 h-64 opacity-50" />
+            </div>
+          </div>
         </div>
       </section>
 

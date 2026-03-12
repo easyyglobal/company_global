@@ -35,8 +35,7 @@ export default function Header() {
       )}
     >
       <div className={cn(
-        "mx-auto transition-all duration-500",
-        (scrolled || !isHome) ? "container-custom" : "max-w-full px-8 md:px-16"
+        "mx-auto transition-all duration-500 container-custom"
       )}>
         <div className={cn(
           "transition-all duration-500 flex justify-between items-center",
@@ -69,7 +68,7 @@ export default function Header() {
           </div>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center space-x-12">
+          <nav className="hidden md:flex items-center space-x-6">
             {navItems.map((item) => (
               <Link
                 key={item.path}
@@ -88,16 +87,29 @@ export default function Header() {
                 )} />
               </Link>
             ))}
-            <Link
-              to="/contact"
-              className={cn(
-                "btn-primary py-3 px-8 text-sm flex items-center group",
-                !scrolled && isHome && "bg-white text-primary hover:bg-white/90 shadow-none"
-              )}
-            >
-              <PhoneCall className="w-4 h-4 mr-2 group-hover:rotate-12 transition-transform" />
-              상담 신청
-            </Link>
+            <div className="flex items-center space-x-3">
+              <Link
+                to="/contact"
+                className={cn(
+                  "btn-primary py-3 px-6 text-sm flex items-center group",
+                  !scrolled && isHome && "bg-white text-dark font-bold hover:bg-white/90 shadow-none"
+                )}
+              >
+                <PhoneCall className="w-4 h-4 mr-2 group-hover:rotate-12 transition-transform" />
+                상담 신청
+              </Link>
+              <a
+                href="https://www.easyglobal.kr/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  "btn-accent py-3 px-6 text-sm flex items-center group",
+                  !scrolled && isHome && "bg-white/10 text-white hover:bg-white/20 shadow-none border border-white/20"
+                )}
+              >
+                이지글로벌
+              </a>
+            </div>
           </nav>
 
           {/* Mobile Menu Button */}

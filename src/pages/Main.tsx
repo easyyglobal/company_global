@@ -25,7 +25,7 @@ export default function Main() {
           <div className="absolute inset-0 bg-dark/40 backdrop-blur-[2px]" />
         </div>
 
-        <div className="container mx-auto px-6 relative z-10">
+        <div className="container-custom mx-auto px-6 relative z-10">
           <div className="max-w-3xl">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -71,7 +71,7 @@ export default function Main() {
 
       {/* Pain Points Section */}
       <section className="py-32 bg-white">
-        <div className="container mx-auto px-6">
+        <div className="container-custom mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <motion.div {...fadeIn}>
               <span className="text-primary font-black uppercase tracking-widest text-[10px] mb-4 block">Problem</span>
@@ -141,7 +141,7 @@ export default function Main() {
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary rounded-full blur-[120px]" />
         </div>
 
-        <div className="container mx-auto px-6 relative z-10">
+        <div className="container-custom mx-auto px-6 relative z-10">
           <div className="text-center mb-24">
             <motion.span {...fadeIn} className="text-primary font-black uppercase tracking-widest text-[10px] mb-4 block">Solution</motion.span>
             <motion.h2 {...fadeIn} className="text-2xl md:text-5xl font-black text-white mb-8 tracking-tight">
@@ -190,14 +190,14 @@ export default function Main() {
       </section>
 
       {/* Portfolio Gallery Slider */}
-      <section className="py-32 bg-dark overflow-hidden">
-        <div className="container-custom mb-16">
+      <section className="py-32 bg-bg overflow-hidden">
+        <div className="container-custom mx-auto mb-16">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
             <div className="space-y-4">
               <span className="text-primary font-black uppercase tracking-widest text-[10px] block">Our Portfolio</span>
-              <h2 className="text-4xl font-black text-white tracking-tight">실제 진행 프로젝트</h2>
+              <h2 className="text-4xl font-black text-dark tracking-tight">실제 진행 프로젝트</h2>
             </div>
-            <p className="text-white/40 font-medium max-w-md">
+            <p className="text-dark/40 font-medium max-w-md">
               국내외 유수 기업들과 함께한 성공적인 비즈니스 여행 및 연수 사례입니다.
             </p>
           </div>
@@ -246,7 +246,7 @@ export default function Main() {
       {/* CTA Section */}
       <section className="py-32 bg-white relative overflow-hidden border-t border-dark/5">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-primary/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2" />
-        <div className="container mx-auto px-6 relative z-10">
+        <div className="container-custom mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-5xl font-black text-dark mb-8 tracking-tight leading-tight">
               당신의 비즈니스 여행을 <br />

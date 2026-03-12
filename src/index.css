@@ -29,13 +29,13 @@
     @apply bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all duration-300;
   }
   .btn-primary {
-    @apply px-8 py-4 rounded-2xl bg-gradient-to-br from-primary to-[#36D7C7] text-white font-bold shadow-[0_10px_20px_-10px_rgba(45,196,181,0.5)] hover:shadow-[0_15px_30px_-10px_rgba(45,196,181,0.6)] hover:-translate-y-1 active:scale-95 transition-all duration-500 flex items-center justify-center;
+    @apply px-8 py-4 rounded-2xl bg-gradient-to-r from-[#2DC4B5] via-[#48D1CC] to-[#20B2AA] text-white font-bold shadow-[0_10px_20px_-10px_rgba(45,196,181,0.5)] hover:shadow-[0_15px_30px_-10px_rgba(45,196,181,0.6)] hover:-translate-y-1 active:scale-95 transition-all duration-500 flex items-center justify-center bg-[length:200%_auto] hover:bg-[position:right_center];
   }
   .btn-secondary {
-    @apply px-8 py-4 rounded-2xl bg-gradient-to-br from-secondary to-[#FF8E8E] text-white font-bold shadow-[0_10px_20px_-10px_rgba(255,107,107,0.5)] hover:shadow-[0_15px_30px_-10px_rgba(255,107,107,0.6)] hover:-translate-y-1 active:scale-95 transition-all duration-500 flex items-center justify-center;
+    @apply px-8 py-4 rounded-2xl bg-gradient-to-r from-[#FF6B6B] via-[#FF8E8E] to-[#FF4D4D] text-white font-bold shadow-[0_10px_20px_-10px_rgba(255,107,107,0.5)] hover:shadow-[0_15px_30px_-10px_rgba(255,107,107,0.6)] hover:-translate-y-1 active:scale-95 transition-all duration-500 flex items-center justify-center bg-[length:200%_auto] hover:bg-[position:right_center];
   }
   .btn-accent {
-    @apply px-8 py-4 rounded-2xl bg-gradient-to-br from-accent to-[#8E7FFF] text-white font-bold shadow-[0_10px_20px_-10px_rgba(108,92,231,0.5)] hover:shadow-[0_15px_30px_-10px_rgba(108,92,231,0.6)] hover:-translate-y-1 active:scale-95 transition-all duration-500 flex items-center justify-center;
+    @apply px-8 py-4 rounded-2xl bg-gradient-to-r from-[#6C5CE7] via-[#8E7FFF] to-[#5A4AD1] text-white font-bold shadow-[0_10px_20px_-10px_rgba(108,92,231,0.5)] hover:shadow-[0_15px_30px_-10px_rgba(108,92,231,0.6)] hover:-translate-y-1 active:scale-95 transition-all duration-500 flex items-center justify-center bg-[length:200%_auto] hover:bg-[position:right_center];
   }
   .btn-glass {
     @apply px-8 py-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-dark font-bold hover:bg-white/20 hover:-translate-y-1 active:scale-95 transition-all duration-500 flex items-center justify-center;
@@ -48,4 +48,10 @@
 
 .markdown-body {
   @apply prose prose-slate max-w-none;
+}
+
+@media print {
+  body > *:not(.print-only) {
+    display: none !important;
+  }
 }

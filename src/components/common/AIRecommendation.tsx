@@ -137,7 +137,7 @@ export default function AIRecommendation() {
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative w-full max-w-2xl bg-white rounded-[3rem] shadow-2xl overflow-hidden print:shadow-none print:rounded-none print:max-w-none print:fixed print:inset-0 print:z-[9999]"
+              className="relative w-full max-w-2xl bg-white rounded-[3rem] shadow-2xl overflow-hidden print-only print:shadow-none print:rounded-none print:max-w-none print:fixed print:inset-0 print:z-[9999] flex flex-col max-h-[90vh]"
             >
               {/* Header */}
               <div className="p-8 border-b border-dark/5 flex justify-between items-center bg-bg/50 no-print">
@@ -159,7 +159,7 @@ export default function AIRecommendation() {
               </div>
 
               {/* Content */}
-              <div className="p-8 min-h-[450px] flex flex-col print:p-0">
+              <div className="p-8 min-h-[450px] flex flex-col print:p-0 overflow-y-auto flex-1">
                 <AnimatePresence mode="wait">
                   {step === 'start' && (
                     <motion.div
@@ -354,7 +354,7 @@ export default function AIRecommendation() {
                       animate={{ opacity: 1, scale: 1 }}
                       className="space-y-8 print:space-y-6"
                     >
-                      <div className="flex justify-between items-start no-print">
+                      <div className="flex justify-between items-start no-print mb-8">
                         <div className="space-y-2">
                           <span className="text-primary font-black text-xs uppercase tracking-widest">Analysis Complete</span>
                           <h4 className="text-2xl font-black text-dark tracking-tight">맞춤 제안서가 도착했습니다</h4>

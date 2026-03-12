@@ -12,23 +12,28 @@ export default function Features() {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-full bg-primary/5 blur-[120px] rounded-full" />
         
         <div className="container-custom relative">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="max-w-3xl"
-          >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-[10px] font-black uppercase tracking-[0.2em] mb-6">
-              Core Value & Services
-            </span>
-            <h1 className="text-5xl md:text-7xl font-black text-dark tracking-tight leading-[1.1] mb-8">
-              비즈니스 여행의<br />
-              <span className="text-primary italic">새로운 패러다임</span>
-            </h1>
-            <p className="text-xl text-dark/60 font-medium leading-relaxed">
-              기업여행연구소만의 차별화된 기술력과 글로벌 파트너십으로<br />
-              비즈니스 여행의 본질적인 가치를 실현합니다.
-            </p>
-          </motion.div>
+          <div className="flex items-center justify-between">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="max-w-3xl"
+            >
+              <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-[10px] font-black uppercase tracking-[0.2em] mb-6">
+                Core Value & Services
+              </span>
+              <h1 className="text-4xl md:text-5xl font-black text-dark tracking-tight leading-[1.1] mb-8">
+                비즈니스 여행의<br />
+                <span className="text-primary italic">새로운 패러다임</span>
+              </h1>
+              <p className="text-lg text-dark/60 font-medium leading-relaxed">
+                기업여행연구소만의 차별화된 기술력과 글로벌 파트너십으로<br />
+                비즈니스 여행의 본질적인 가치를 실현합니다.
+              </p>
+            </motion.div>
+            <div className="hidden md:block">
+              <img src="/images/3d-icon.png" alt="3D Icon" className="w-64 h-64 opacity-50" />
+            </div>
+          </div>
         </div>
       </section>
 
