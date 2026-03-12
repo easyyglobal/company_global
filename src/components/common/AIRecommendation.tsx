@@ -137,7 +137,7 @@ export default function AIRecommendation() {
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative w-full max-w-2xl bg-white rounded-[3rem] shadow-2xl overflow-hidden print-only print:shadow-none print:rounded-none print:max-w-none print:fixed print:inset-0 print:z-[9999] flex flex-col max-h-[90vh] print:max-h-none print:h-auto print:overflow-visible"
+              className="relative w-full max-w-2xl bg-white rounded-[3rem] shadow-2xl overflow-hidden print-only print:shadow-none print:rounded-none print:max-w-none print:fixed print:inset-0 print:z-[9999] flex flex-col max-h-[90vh] print:max-h-screen print:h-screen print:overflow-hidden print:bg-white"
             >
               {/* Header */}
               <div className="p-8 border-b border-dark/5 flex justify-between items-center bg-bg/50 no-print">
@@ -159,7 +159,7 @@ export default function AIRecommendation() {
               </div>
 
               {/* Content */}
-              <div className="p-8 min-h-[450px] flex flex-col print:p-0 overflow-y-auto flex-1 print:overflow-visible">
+              <div className="p-8 min-h-[450px] flex flex-col print:p-0 overflow-y-auto flex-1 print:overflow-hidden">
                 <AnimatePresence mode="wait">
                   {step === 'start' && (
                     <motion.div
@@ -378,14 +378,14 @@ export default function AIRecommendation() {
                       </div>
 
                       {/* Proposal Template */}
-                      <div className="bg-bg/50 rounded-[2rem] p-8 border border-dark/5 space-y-8 print:bg-white print:border-none print:p-0">
+                      <div className="bg-bg/50 rounded-[2rem] p-8 border border-dark/5 space-y-8 print:bg-white print:border-none print:p-0 print:space-y-4">
                         <div className="text-center space-y-2 pb-8 border-b border-dark/5">
                           <h2 className="text-2xl font-black text-dark">{proposalData.title}</h2>
                           <p className="text-sm text-dark/40 font-bold tracking-widest uppercase">Corporate Travel Lab AI Report</p>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                          <div className="space-y-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 print:gap-4">
+                          <div className="space-y-6 print:space-y-4">
                             <section className="space-y-3">
                               <h5 className="text-sm font-black text-primary uppercase tracking-wider flex items-center">
                                 <Sparkles className="w-4 h-4 mr-2" /> 핵심 요약
@@ -410,15 +410,15 @@ export default function AIRecommendation() {
                             </section>
                           </div>
 
-                          <div className="space-y-6">
-                            <section className="space-y-3 p-6 bg-white rounded-2xl border border-dark/5">
+                          <div className="space-y-6 print:space-y-4">
+                            <section className="space-y-3 p-6 bg-white rounded-2xl border border-dark/5 print:p-4">
                               <h5 className="text-sm font-black text-dark uppercase tracking-wider">예상 견적 가이드</h5>
                               <p className="text-sm text-dark/70 font-medium leading-relaxed">
                                 {proposalData.budget_guide}
                               </p>
                             </section>
 
-                            <section className="space-y-3 p-6 bg-primary/5 rounded-2xl border border-primary/10">
+                            <section className="space-y-3 p-6 bg-primary/5 rounded-2xl border border-primary/10 print:p-4">
                               <h5 className="text-sm font-black text-primary uppercase tracking-wider">전문가 팁</h5>
                               <p className="text-sm text-primary/80 font-medium leading-relaxed italic">
                                 "{proposalData.expert_tip}"
@@ -434,7 +434,7 @@ export default function AIRecommendation() {
                           </div>
                         </div>
 
-                        <div className="pt-8 border-t border-dark/5 text-center">
+                        <div className="pt-8 border-t border-dark/5 text-center print:pt-4">
                           <p className="text-[10px] text-dark/30 font-bold uppercase tracking-[0.2em]">
                             본 제안서는 AI에 의해 생성되었으며, 실제 견적은 상담을 통해 확정됩니다.
                           </p>
