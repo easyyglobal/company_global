@@ -61,7 +61,7 @@ export default function Contact() {
 
     try {
       // 구글 앱스 스크립트 웹앱 URL을 여기에 입력하세요.
-      const scriptUrl = 'https://script.google.com/macros/s/AKfycbzQpfnrR0Vu5GoCwFiZvAtzWjVtH6r6LVSWfq7CNqsAEUHycfy7pNk2jHwhf6OxoaPq/exec'; 
+      const scriptUrl = 'YOUR_GOOGLE_APPS_SCRIPT_URL'; 
       
       // 임시 URL인 경우 성공한 것처럼 처리 (미리보기 환경용)
       if (scriptUrl === 'YOUR_GOOGLE_APPS_SCRIPT_URL') {
