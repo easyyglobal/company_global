@@ -11,8 +11,8 @@ export default function Main() {
 
   useEffect(() => {
     // 영상 재생 속도를 0.7배속으로 느리게 설정 (1.0이 기본 속도)
-    if (desktopVideoRef.current) desktopVideoRef.current.playbackRate = 0.5;
-    if (mobileVideoRef.current) mobileVideoRef.current.playbackRate = 0.5;
+    if (desktopVideoRef.current) desktopVideoRef.current.playbackRate = 0.7;
+    if (mobileVideoRef.current) mobileVideoRef.current.playbackRate = 0.7;
   }, []);
 
   const openAI = (e: React.MouseEvent) => {
@@ -47,7 +47,17 @@ export default function Main() {
             playsInline
             className="block md:hidden w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-dark/40 backdrop-blur-[2px]" />
+          {/* 1. 어두운 그라데이션 오버레이 (텍스트 가독성 확보) */}
+          <div className="absolute inset-0 bg-gradient-to-b from-dark/60 via-dark/30 to-dark/60" />
+          
+          {/* 2. 미세한 도트 패턴 오버레이 (영상 압축 열화를 감춰주고 시네마틱한 느낌을 줌) */}
+          <div 
+            className="absolute inset-0 opacity-30" 
+            style={{ 
+              backgroundImage: 'radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px)', 
+              backgroundSize: '4px 4px' 
+            }} 
+          />
         </div>
 
         <div className="container-custom w-full mx-auto px-6 relative z-10">

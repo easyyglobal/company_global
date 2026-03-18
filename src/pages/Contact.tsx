@@ -62,7 +62,7 @@ export default function Contact() {
     try {
       // 구글 앱스 스크립트 웹앱 URL을 여기에 입력하세요.
       // 주의: 반드시 본인의 배포된 웹앱 URL로 변경해야 합니다!
-      const scriptUrl = 'https://script.google.com/macros/s/AKfycbz6ixBK8VMstnIWCdOiKUzQm9H91UybjL3713jtxW9Z4UHuJLkP-Ph7e7I_7PsqBesQ/exec'; 
+      const scriptUrl = 'YOUR_GOOGLE_APPS_SCRIPT_URL'; 
       
       if (scriptUrl === 'YOUR_GOOGLE_APPS_SCRIPT_URL') {
         alert('구글 앱스 스크립트 URL이 입력되지 않았습니다. 코드(Contact.tsx)를 확인해주세요.');
