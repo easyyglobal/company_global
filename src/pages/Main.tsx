@@ -52,7 +52,7 @@ export default function Main() {
           
           {/* 2. 미세한 도트 패턴 오버레이 (영상 압축 열화를 감춰주고 시네마틱한 느낌을 줌) */}
           <div 
-            className="absolute inset-0 opacity-30" 
+            className="absolute inset-0 opacity-10" 
             style={{ 
               backgroundImage: 'radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px)', 
               backgroundSize: '4px 4px' 
