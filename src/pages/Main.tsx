@@ -11,8 +11,8 @@ export default function Main() {
 
   useEffect(() => {
     // 영상 재생 속도를 0.7배속으로 느리게 설정 (1.0이 기본 속도)
-    if (desktopVideoRef.current) desktopVideoRef.current.playbackRate = 0.7;
-    if (mobileVideoRef.current) mobileVideoRef.current.playbackRate = 0.7;
+    if (desktopVideoRef.current) desktopVideoRef.current.playbackRate = 0.5;
+    if (mobileVideoRef.current) mobileVideoRef.current.playbackRate = 0.5;
   }, []);
 
   const openAI = (e: React.MouseEvent) => {
