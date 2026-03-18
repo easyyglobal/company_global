@@ -21,11 +21,25 @@ export default function AIRecommendation() {
   const [showCustomPurpose, setShowCustomPurpose] = useState(false);
   const [proposalData, setProposalData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   React.useEffect(() => {
     const handleOpen = () => setIsOpen(true);
     window.addEventListener('open-ai-modal', handleOpen);
-    return () => window.removeEventListener('open-ai-modal', handleOpen);
+    
+    const handleScroll = () => {
+      if (window.pageYOffset > 300) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    
+    return () => {
+      window.removeEventListener('open-ai-modal', handleOpen);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   const handleNext = (field: string, value: string, nextStep: Step) => {
@@ -105,7 +119,7 @@ export default function AIRecommendation() {
   return (
     <>
       {/* Floating Button - Always visible in bottom right */}
-      <div className="fixed bottom-24 right-8 md:right-12 z-40">
+      <div className={`fixed right-6 md:right-10 z-40 transition-all duration-300 ${isScrolled ? 'bottom-24 md:bottom-28' : 'bottom-6 md:bottom-10'}`}>
         <motion.button
           whileHover={{ scale: 1.05, y: -5 }}
           whileTap={{ scale: 0.95 }}
@@ -114,9 +128,9 @@ export default function AIRecommendation() {
         >
           <div className="absolute -inset-1 bg-gradient-to-r from-primary via-accent to-secondary rounded-full blur-md opacity-40 group-hover:opacity-100 transition duration-1000 animate-pulse" />
           
-          <div className="relative bg-dark text-white px-6 py-4 rounded-full shadow-2xl flex items-center space-x-3 border border-white/10 backdrop-blur-xl">
-            <Sparkles className="w-5 h-5 text-primary" />
-            <span className="font-bold text-sm tracking-tight">AI 맞춤 제안서 받기</span>
+          <div className="relative bg-dark text-white w-14 h-14 md:w-auto md:h-auto md:px-6 md:py-4 rounded-full shadow-2xl flex items-center justify-center md:space-x-3 border border-white/10 backdrop-blur-xl">
+            <Sparkles className="w-6 h-6 md:w-5 md:h-5 text-primary flex-shrink-0" />
+            <span className="hidden md:block font-bold text-sm tracking-tight whitespace-nowrap">AI 맞춤 제안서 받기</span>
           </div>
         </motion.button>
       </div>

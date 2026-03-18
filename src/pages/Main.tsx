@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight, CheckCircle2, Users, ShieldCheck, Zap, BarChart3, Globe, Sparkles, ChevronRight, PhoneCall, Shield } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -6,6 +6,15 @@ import { fadeIn } from '../constants';
 import PromotionPopup from '../components/common/PromotionPopup';
 
 export default function Main() {
+  const desktopVideoRef = useRef<HTMLVideoElement>(null);
+  const mobileVideoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    // 영상 재생 속도를 0.7배속으로 느리게 설정 (1.0이 기본 속도)
+    if (desktopVideoRef.current) desktopVideoRef.current.playbackRate = 0.7;
+    if (mobileVideoRef.current) mobileVideoRef.current.playbackRate = 0.7;
+  }, []);
+
   const openAI = (e: React.MouseEvent) => {
     e.preventDefault();
     window.dispatchEvent(new CustomEvent('open-ai-modal'));
@@ -16,11 +25,27 @@ export default function Main() {
       {/* Hero Section */}
       <section className="relative h-screen flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img 
-            src="/images/hero-bg.jpg" 
-            alt="Hero Background" 
-            className="w-full h-full object-cover"
-            referrerPolicy="no-referrer"
+          {/* PC용 동영상 */}
+          <video 
+            ref={desktopVideoRef}
+            src="/videos/hero-bg-pc.mp4" 
+            poster="/images/hero-bg-pc.jpg"
+            autoPlay 
+            loop 
+            muted 
+            playsInline
+            className="hidden md:block w-full h-full object-cover"
+          />
+          {/* 모바일용 동영상 */}
+          <video 
+            ref={mobileVideoRef}
+            src="/videos/hero-bg-mobile.mp4" 
+            poster="/images/hero-bg-mobile.jpg"
+            autoPlay 
+            loop 
+            muted 
+            playsInline
+            className="block md:hidden w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-dark/40 backdrop-blur-[2px]" />
         </div>

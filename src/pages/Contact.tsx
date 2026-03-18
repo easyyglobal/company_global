@@ -62,7 +62,7 @@ export default function Contact() {
     try {
       // 구글 앱스 스크립트 웹앱 URL을 여기에 입력하세요.
       // 주의: 반드시 본인의 배포된 웹앱 URL로 변경해야 합니다!
-      const scriptUrl = 'https://script.google.com/macros/s/AKfycbz6ixBK8VMstnIWCdOiKUzQm9H91UybjL3713jtxW9Z4UHuJLkP-Ph7e7I_7PsqBesQ/exec'; 
+      const scriptUrl = 'YOUR_GOOGLE_APPS_SCRIPT_URL'; 
       
       if (scriptUrl === 'YOUR_GOOGLE_APPS_SCRIPT_URL') {
         alert('구글 앱스 스크립트 URL이 입력되지 않았습니다. 코드(Contact.tsx)를 확인해주세요.');
@@ -144,7 +144,7 @@ export default function Contact() {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-20">
             {/* Contact Info */}
-            <div className="lg:col-span-1 space-y-16">
+            <div className="lg:col-span-1 space-y-16 order-2 lg:order-1">
               <motion.div {...fadeIn}>
                 <h2 className="text-3xl font-black text-dark mb-10 tracking-tight">연락처 정보</h2>
                 <div className="space-y-8">
@@ -191,7 +191,7 @@ export default function Contact() {
             </div>
 
             {/* Inquiry Form */}
-            <div className="lg:col-span-2">
+            <div className="lg:col-span-2 order-1 lg:order-2">
               <motion.div 
                 {...fadeIn}
                 className="bg-white p-10 md:p-16 rounded-[4rem] shadow-2xl shadow-dark/5 border border-dark/5"
