@@ -44,15 +44,14 @@ export default function Header() {
             : "bg-transparent py-2"
         )}>
           <div className="flex items-center">
-            <Link to="/" className="flex items-center space-x-3 group">
-              <div className={cn(
-                "w-12 h-12 rounded-2xl flex items-center justify-center group-hover:rotate-12 transition-all duration-500 shadow-lg",
-                scrolled ? "bg-primary shadow-primary/20" : "bg-white shadow-white/10"
-              )}>
-                <span className={cn(
-                  "font-black text-2xl",
-                  scrolled ? "text-white" : "text-primary"
-                )}>C</span>
+            <Link to="/" className="flex items-center space-x-2 group>
+              <div className="w-10 h-10 flex items-center justify-center group-hover:rotate-12 transition-transform">
+                <img 
+                  src="/images/logo.png" // 이 부분을 실제 파일 경로로 수정하세요!
+                  alt="기업여행연구소 로고" 
+                  className="w-full h-full object-contain"
+                  referrerPolicy="no-referrer"
+                />
               </div>
               <div className="flex flex-col">
                 <span className={cn(
