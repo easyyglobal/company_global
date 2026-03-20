@@ -40,12 +40,12 @@ export default function Header() {
         <div className={cn(
           "transition-all duration-500 flex justify-between items-center",
           (scrolled || !isHome)
-            ? "glass rounded-[2rem] px-8 py-4 shadow-lg" 
+            ? "glass rounded-2xl px-4 py-2 shadow-lg" 
             : "bg-transparent py-2"
         )}>
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2 group">
-              <div className="w-10 h-10 flex items-center justify-center group-hover:rotate-12 transition-transform">
+              <div className="w-12 h-12 flex items-center justify-center group-hover:rotate-12 transition-transform">
                 <img 
                   src="/images/logo.png" // 이 부분을 실제 파일 경로로 수정하세요!
                   alt="기업여행연구소 로고" 

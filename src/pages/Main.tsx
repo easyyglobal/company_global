@@ -69,16 +69,16 @@ export default function Main() {
             >
               <div className="inline-flex items-center space-x-2 bg-primary/20 text-white px-4 py-2 rounded-full text-[10px] font-black tracking-widest uppercase mb-8 backdrop-blur-md border border-white/10">
                 <Sparkles className="w-4 h-4 text-primary" />
-                <span>Corporate Travel Lab</span>
+                <span>RELIABLE GROWTH PARTNER</span>
               </div>
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-white mb-8 tracking-tight leading-[1.1]">
-                귀찮은 출장 품의,<br />
-                <span className="text-primary italic">전문가가 0원</span>으로<br />
-                대행합니다.
+                기업의 목표를 완수하는 여행,<br />
+                <span className="text-primary italic">전문가가 직접</span><br />
+                철저하게 설계합니다.
               </h1>
               <p className="text-lg md:text-xl text-white/80 mb-12 max-w-xl font-medium leading-relaxed">
-                인사총무팀 업무량 70% 감소. 글로벌 파트너십 특가 적용.<br />
-                실무자는 목적지만 말씀하세요. 나머지는 저희가 책임집니다.
+                조직의 성과와 팀워크를 극대화하는,<br />
+                최고의 기업 여행을 연구하고 기획합니다.
               </p>
               <div className="flex flex-col sm:flex-row items-center gap-4">
                 <Link to="/contact" className="btn-primary px-10 py-5 text-lg rounded-full w-full sm:w-auto flex items-center justify-center group">
