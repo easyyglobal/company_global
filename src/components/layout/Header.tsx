@@ -44,7 +44,7 @@ export default function Header() {
             : "bg-transparent py-2"
         )}>
           <div className="flex items-center">
-            <Link to="/" className="flex items-center space-x-2 group>
+            <Link to="/" className="flex items-center space-x-2 group">
               <div className="w-10 h-10 flex items-center justify-center group-hover:rotate-12 transition-transform">
                 <img 
                   src="/images/logo.png" // 이 부분을 실제 파일 경로로 수정하세요!
