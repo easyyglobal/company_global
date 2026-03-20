@@ -72,8 +72,8 @@ export default function Main() {
                 <span>RELIABLE GROWTH PARTNER</span>
               </div>
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-white mb-8 tracking-tight leading-[1.1]">
-                기업의 목표를 완수하는 여행,<br />
-                <span className="text-primary italic">전문가가 직접</span><br />
+                목표를 완수하는 여행,<br />
+                <span className="text-primary italic">기업의 성장</span>을 위해<br />
                 철저하게 설계합니다.
               </h1>
               <p className="text-lg md:text-xl text-white/80 mb-12 max-w-xl font-medium leading-relaxed">

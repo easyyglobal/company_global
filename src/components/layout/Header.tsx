@@ -104,7 +104,7 @@ export default function Header() {
                 className={cn(
                   "h-[46px] px-6 flex items-center justify-center rounded-xl transition-all duration-300 group backdrop-blur-md border",
                   !scrolled && isHome 
-                    ? "bg-white/10 border-white/20 hover:bg-white/20" 
+                    ? "bg-white/90 border-white/20 hover:bg-white/20" 
                     : "bg-dark/5 border-dark/10 hover:bg-dark/10"
                 )}
                 title="이지글로벌 홈페이지로 이동"
