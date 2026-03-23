@@ -30,7 +30,7 @@ export default function About() {
               </p>
             </motion.div>
             <div className="hidden md:block">
-              <img src="/images/3d-icon3.png" alt="3D Icon" className="w-64 h-64 opacity-50" />
+              <img src="/images/3d-icon3.png" alt="3D Icon" className="w-64 h-64 " />
             </div>
           </div>
         </div>
