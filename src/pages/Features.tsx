@@ -168,12 +168,10 @@ export default function Features() {
                 <div className="flex items-center space-x-8">
                   <div className="flex -space-x-4">
                     {[1, 2, 3, 4].map(i => (
-                    {/* 1. 이미지를 감싸는 원형 틀(div)을 만들고, 메인 컬러 테두리(border-primary)와 흰색 배경(bg-white)을 줍니다. */}
                     <div 
                       key={i} 
                       className="w-14 h-14 rounded-full border-4 border-primary bg-white overflow-hidden flex items-center justify-center relative z-10"
                     >
-                      {/* 2. 확장자를 .png로 바꾸고, 이미지가 원 안에 꽉 차도록(object-cover) 설정합니다. */}
                       <img 
                         src={`/images/manager-${i}.png`} 
                         className="w-full h-full object-cover" 
