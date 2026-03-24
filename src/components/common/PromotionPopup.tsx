@@ -43,7 +43,18 @@ export default function PromotionPopup() {
               exit={{ opacity: 0, y: 20, scale: 0.9 }}
               className="pointer-events-auto bg-white rounded-[2.5rem] shadow-2xl border border-dark/5 overflow-hidden w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[400px]"
             >
-              {/* Promotion Image */}
+              {/* Promotion Video */}
+              <div className="relative aspect-[3/4] bg-bg overflow-hidden">
+                <video 
+                  src="/videos/promotion.mp4" 
+                  poster="/images/promotion.jpg"
+                  autoPlay 
+                  loop 
+                  muted 
+                  playsInline
+                  className="w-full h-full object-cover"
+                />
+              {/* Promotion Image 
               <div className="relative aspect-[3/4] bg-bg overflow-hidden">
                 <img 
                   src="/images/promotion.jpg" 
@@ -52,7 +63,7 @@ export default function PromotionPopup() {
                   onError={(e) => {
                     e.currentTarget.src = "https://picsum.photos/seed/promotion/400/600";
                   }}
-                />
+                />*/}
                 <button 
                   onClick={closePopup}
                   className="absolute top-4 right-4 w-8 h-8 rounded-full bg-dark/20 backdrop-blur-md text-white flex items-center justify-center hover:bg-dark/40 transition-colors"
