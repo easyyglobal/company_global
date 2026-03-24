@@ -66,7 +66,7 @@ export default function Details() {
             </motion.div>
             <motion.div {...fadeIn} className="rounded-[3rem] overflow-hidden shadow-2xl">
               <img 
-                src="/images/service-vip.jpg" 
+                src="/images/details1.jpg" 
                 alt="VIP Service" 
                 className="w-full h-full object-cover"
                 onError={(e) => {
@@ -81,7 +81,7 @@ export default function Details() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <motion.div {...fadeIn} className="order-2 lg:order-1 rounded-[3rem] overflow-hidden shadow-2xl">
               <img 
-                src="/images/service-workshop.jpg" 
+                src="/images/details2.jpg" 
                 alt="Workshop" 
                 className="w-full h-full object-cover"
                 onError={(e) => {
@@ -144,7 +144,7 @@ export default function Details() {
             </motion.div>
             <motion.div {...fadeIn} className="rounded-[3rem] overflow-hidden shadow-2xl">
               <img 
-                src="/images/service-esg.jpg" 
+                src="/images/details3.jpg" 
                 alt="ESG Training" 
                 className="w-full h-full object-cover"
                 onError={(e) => {

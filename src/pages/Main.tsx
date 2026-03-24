@@ -251,12 +251,12 @@ export default function Main() {
             {[
               { title: "글로벌 IT 기업 팀빌딩", location: "제주도", img: "/images/service-workshop.jpg" },
               { title: "금융사 우수 임직원 포상", location: "다낭", img: "/images/service-vip.jpg" },
-              { title: "제조사 신입사원 연수", location: "일본", img: "/images/service-esg.jpg" },
-              { title: "대기업 임원진 워크샵", location: "하와이", img: "/images/hero-bg.jpg" },
+              { title: "제조사 신입사원 연수", location: "일본", img: "/images/service-vip.jpg" },
+              { title: "대기업 임원진 워크샵", location: "하와이", img: "/images/service-workshop.jpg" },
               { title: "스타트업 전사 워크샵", location: "강원도", img: "/images/service-workshop.jpg" },
               { title: "글로벌 IT 기업 팀빌딩", location: "제주도", img: "/images/service-workshop.jpg" },
               { title: "금융사 우수 임직원 포상", location: "다낭", img: "/images/service-vip.jpg" },
-              { title: "제조사 신입사원 연수", location: "일본", img: "/images/service-esg.jpg" },
+              { title: "제조사 신입사원 연수", location: "일본", img: "/images/service-vip.jpg" },
             ].map((item, idx) => (
               <div key={idx} className="flex-shrink-0 w-80 group cursor-pointer">
                 <div className="relative aspect-[3/4] rounded-[2rem] overflow-hidden mb-6">
