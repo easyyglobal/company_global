@@ -110,10 +110,10 @@ export default function Main() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <motion.div {...fadeIn}>
               <span className="text-primary font-black uppercase tracking-widest text-[10px] mb-4 block">Problem</span>
-              <h2 className="text-2xl md:text-4xl font-black text-dark mb-8 leading-tight tracking-tight">
+              <h2 className="text-2xl md:text-4xl font-black text-dark mb-4 md:mb-8 leading-tight tracking-tight">
                 아직도 엑셀과 씨름하며<br />최저가를 찾고 계신가요?
               </h2>
-              <p className="text-lg text-dark/60 mb-12 leading-relaxed font-medium">
+              <p className="md:text-lg text-dark/60 mb-8 md:mb-12 leading-relaxed font-medium">
                 항공권 비교, 호텔 예약, 영수증 처리까지...<br />
                 인사총무팀의 소중한 시간이 단순 반복 업무에 낭비되고 있습니다.
               </p>
@@ -126,7 +126,7 @@ export default function Main() {
                   <motion.div 
                     key={i}
                     whileHover={{ x: 10 }}
-                    className="flex items-center space-x-6 p-6 rounded-3xl bg-bg border border-dark/5 shadow-sm group transition-all"
+                    className="flex items-center space-x-6 p-4 md:p-6 rounded-3xl bg-bg border border-dark/5 shadow-sm group transition-all"
                   >
                     <div className={`w-12 h-12 rounded-2xl ${item.color} flex items-center justify-center group-hover:scale-110 transition-transform`}>
                       <item.icon className="w-6 h-6" />

@@ -170,7 +170,7 @@ export default function Features() {
                     {[1, 2, 3, 4].map(i => (
                     <div 
                       key={i} 
-                      className="w-14 h-14 rounded-full border-4 border-primary bg-white overflow-hidden flex items-center justify-center relative z-10"
+                      className="w-14 h-14 rounded-full border-4 bg-white overflow-hidden flex items-center justify-center relative z-10"
                     >
                       <img 
                         src={`/images/manager-${i}.png`} 
