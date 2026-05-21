@@ -107,7 +107,7 @@ export default function Main() {
       {/* Pain Points Section */}
       <section className="py-32 bg-white">
         <div className="container-custom mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-20 items-center">
             <motion.div {...fadeIn}>
               <span className="text-primary font-black uppercase tracking-widest text-[10px] mb-4 block">Problem</span>
               <h2 className="text-2xl md:text-4xl font-black text-dark mb-4 md:mb-8 leading-tight tracking-tight">
@@ -170,14 +170,14 @@ export default function Main() {
       </section>
 
       {/* Solution Section */}
-      <section className="py-32 bg-dark relative overflow-hidden">
+      <section className="py-24 md:py-32 bg-dark relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary rounded-full blur-[120px]" />
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary rounded-full blur-[120px]" />
         </div>
 
         <div className="container-custom mx-auto px-6 relative z-10">
-          <div className="text-center mb-24">
+          <div className="text-center mb-12 md:mb-24">
             <motion.span {...fadeIn} className="text-primary font-black uppercase tracking-widest text-[10px] mb-4 block">Solution</motion.span>
             <motion.h2 {...fadeIn} className="text-2xl md:text-5xl font-black text-white mb-8 tracking-tight">
               Zero-Task 솔루션으로<br />업무의 질을 바꾸세요.
@@ -211,7 +211,7 @@ export default function Main() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="p-12 rounded-[3rem] bg-white/5 border border-white/10 hover:bg-white/10 transition-all group"
+                className="p-6 md:p-12 rounded-[3rem] bg-white/5 border border-white/10 hover:bg-white/10 transition-all group"
               >
                 <div className={`w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform ${item.color}`}>
                   <item.icon className="w-8 h-8" />

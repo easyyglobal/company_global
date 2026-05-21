@@ -98,7 +98,7 @@ export default function Header() {
                 상담 신청
               </Link>
               <a
-                href="https://www.easyglobal.kr/"
+                href="https://ezglobal.vercel.app/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
